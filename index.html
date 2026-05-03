@@ -9,21 +9,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root{
-  --bg:#0a0c0f;--bg2:#111419;--bg3:#181c23;--bg4:#1e2229;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --bg:#1e2128;--bg2:#272b34;--bg3:#2e3340;--bg4:#353b49;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
   --gold:#c9a84c;--gold2:#e8c96d;--gold-bg:rgba(201,168,76,0.1);
-  --text:#f0ede6;--text2:#8a8880;--text3:#4a4845;
+  --text:#e8e4dc;--text2:#8a8f9a;--text3:#555b6a;
   --green:#4caf7d;--green-bg:rgba(76,175,125,0.1);
   --red:#e05c5c;--red-bg:rgba(224,92,92,0.1);
-  --blue:#5c9be0;--blue-bg:rgba(92,155,224,0.1);
-  --amber:#e0a05c;--amber-bg:rgba(224,160,92,0.1);
-  --purple:#9b7dd4;--purple-bg:rgba(155,125,212,0.1);
-  --teal:#4cc9c0;--teal-bg:rgba(76,201,192,0.1);
+  --blue:#3b7fd4;--blue-bg:rgba(59,127,212,0.1);
+  --amber:#c47c1a;--amber-bg:rgba(196,124,26,0.1);
+  --purple:#7c5cc4;--purple-bg:rgba(124,92,196,0.1);
+  --teal:#1ea89f;--teal-bg:rgba(30,168,159,0.1);
   --radius:12px;--radius-lg:20px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+body::before{display:none;}
 
 /* ── UPLOAD ── */
 #upload-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative;z-index:1;}
@@ -49,14 +49,14 @@ input[type=file]{display:none;}
 
 /* ── APP ── */
 #app{display:none;position:relative;z-index:1;}
-.app-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--border);background:rgba(10,12,15,.85);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
+.app-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--border);background:rgba(30,33,40,0.92);backdrop-filter:blur(20px);box-shadow:0 1px 12px rgba(0,0,0,0.3);position:sticky;top:0;z-index:100;}
 .header-brand{display:flex;align-items:center;gap:12px;}
 .header-logo{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);}
 .header-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;}
 .header-sub{font-size:11px;color:var(--text2);margin-top:1px;}
 .header-right{display:flex;align-items:center;gap:8px;}
 .nav-selects{display:flex;gap:8px;align-items:center;}
-.nav-select{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:6px 32px 6px 12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8880' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s;}
+.nav-select{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:6px 32px 6px 12px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s;}
 .nav-select:hover{border-color:var(--gold);}
 .nav-select:focus{border-color:var(--gold);}
 .nav-select option{background:var(--bg2);color:var(--text);}
@@ -64,7 +64,7 @@ input[type=file]{display:none;}
 .save-pill{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;background:var(--green-bg);border:1px solid rgba(76,175,125,.25);font-size:11px;color:var(--green);}
 .save-pill.saving{background:var(--amber-bg);border-color:rgba(224,160,92,.25);color:var(--amber);}
 .btn-sm{padding:7px 14px;border-radius:8px;background:transparent;border:1px solid var(--border2);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
-.btn-sm:hover{color:var(--red);border-color:var(--red);}
+.btn-sm:hover{color:var(--text);border-color:var(--border2);background:var(--bg4);}
 
 .main-content{padding:2rem;max-width:1400px;margin:0 auto;}
 
@@ -434,6 +434,467 @@ input[type=file]{display:none;}
 @media(max-width:1100px){.kpi-strip{grid-template-columns:repeat(3,minmax(0,1fr));}}
 @media(max-width:900px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.grid-2,.grid-3{grid-template-columns:1fr;}}
 @media(max-width:600px){.kpi-strip{grid-template-columns:1fr 1fr;}.app-header{padding:1rem;flex-wrap:wrap;gap:8px;}.main-content{padding:1rem;}}
+
+:root {
+  --bg:     #1e2128;
+  --bg2:    #272b34;
+  --bg3:    #2e3340;
+  --border: rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.14);
+  --gold:   #c9a84c;
+  --gold2:  #e8c96d;
+  --text:   #e8e4dc;
+  --text2:  #8a8f9a;
+  --text3:  #555b6a;
+  --green:  #4caf7d;
+  --blue:   #3b7fd4;
+  --purple: #7c5cc4;
+  --teal:   #1ea89f;
+  --red:    #e05c5c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Noise texture */
+body::before {
+  display: none;
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("");
+  pointer-events: none; z-index: 0; opacity: 0.4;
+}
+
+/* Subtle radial glow top-center */
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(184,146,42,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(30,33,40,0.9);
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark {
+  width: 42px; height: 42px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; color: var(--gold);
+  animation: pulse-ring 4s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%,100% { box-shadow: 0 0 0 0 rgba(184,146,42,0.15); }
+  50%      { box-shadow: 0 0 0 10px rgba(184,146,42,0); }
+}
+.brand-text { line-height: 1.2; }
+.brand-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 600; color: var(--text);
+}
+.brand-sub { font-size: 11px; color: var(--text2); margin-top: 1px; }
+.header-date { font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1;
+  padding: 5rem 3rem 3rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px; background: var(--gold);
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700; line-height: 1.05;
+  color: var(--text); margin-bottom: 1.5rem;
+}
+.hero-headline em {
+  font-style: italic; color: var(--gold);
+}
+.hero-sub {
+  font-size: 16px; color: var(--text2);
+  max-width: 520px; line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+/* ── PATRIMONIO STRIP ── */
+.pat-strip {
+  display: flex; gap: 2rem; margin-bottom: 4rem;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 700px;
+}
+.pat-strip-item { text-align: center; flex: 1; }
+.pat-strip-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.pat-strip-value { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+.pat-strip-value.gold  { color: var(--gold); }
+.pat-strip-value.green { color: var(--green); }
+.pat-strip-value.red   { color: var(--red); }
+.pat-strip-divider { width: 1px; background: var(--border2); }
+
+/* ── MODULES GRID ── */
+.modules {
+  position: relative; z-index: 1;
+  padding: 0 3rem 5rem;
+  max-width: 1200px; margin: 0 auto;
+}
+.modules-label {
+  font-size: 11px; color: var(--text3);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+
+/* ── MODULE CARD ── */
+.mod-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.25s,
+              background 0.25s,
+              box-shadow 0.25s;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.mod-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  opacity: 0; transition: opacity 0.25s;
+}
+.mod-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border2);
+  background: var(--bg3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.mod-card:hover::before { opacity: 1; }
+
+.mod-card.primary { grid-row: 1 / 3; }
+
+/* Color accents per module */
+.mod-card.c-personal::before  { background: linear-gradient(90deg, var(--gold), transparent); }
+.mod-card.c-inmuebles::before { background: linear-gradient(90deg, var(--teal), transparent); }
+.mod-card.c-comun::before     { background: linear-gradient(90deg, var(--purple), transparent); }
+.mod-card.c-ahorro::before    { background: linear-gradient(90deg, var(--green), transparent); }
+
+.mod-card.c-personal:hover  { border-color: rgba(184,146,42,0.4); }
+.mod-card.c-inmuebles:hover { border-color: rgba(30,168,159,0.4); }
+.mod-card.c-comun:hover     { border-color: rgba(124,92,196,0.4); }
+.mod-card.c-ahorro:hover    { border-color: rgba(45,158,106,0.4); }
+
+/* Icon */
+.mod-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+.mod-card.c-personal  .mod-icon { background: rgba(201,168,76,0.12); }
+.mod-card.c-inmuebles .mod-icon { background: rgba(76,201,192,0.12); }
+.mod-card.c-comun     .mod-icon { background: rgba(155,125,212,0.12); }
+.mod-card.c-ahorro    .mod-icon { background: rgba(76,175,125,0.12); }
+
+.mod-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 6px;
+}
+.mod-card.primary .mod-name { font-size: 26px; }
+
+.mod-desc {
+  font-size: 13px; color: var(--text2);
+  line-height: 1.6; margin-bottom: auto;
+}
+.mod-card.primary .mod-desc { font-size: 14px; }
+
+/* Tags */
+.mod-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 1.5rem;
+}
+.mod-tag {
+  font-size: 11px; padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  color: var(--text3);
+}
+.mod-card.c-personal  .mod-tag { border-color: rgba(201,168,76,0.2); color: rgba(201,168,76,0.7); }
+.mod-card.c-inmuebles .mod-tag { border-color: rgba(76,201,192,0.2); color: rgba(76,201,192,0.7); }
+.mod-card.c-comun     .mod-tag { border-color: rgba(155,125,212,0.2); color: rgba(155,125,212,0.7); }
+.mod-card.c-ahorro    .mod-tag { border-color: rgba(76,175,125,0.2); color: rgba(76,175,125,0.7); }
+
+/* Stats inside primary card */
+.mod-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-top: 1.5rem;
+}
+.mod-stat {
+  background: var(--bg3);
+  border-radius: 10px; padding: 10px 12px;
+}
+.mod-stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.mod-stat-value { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+.mod-stat-value.gold   { color: var(--gold); }
+.mod-stat-value.green  { color: var(--green); }
+.mod-stat-value.blue   { color: var(--blue); }
+.mod-stat-value.purple { color: var(--purple); }
+
+/* Arrow */
+.mod-arrow {
+  position: absolute; bottom: 1.75rem; right: 1.75rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--text3);
+  transition: all 0.2s;
+}
+.mod-card:hover .mod-arrow {
+  border-color: var(--border2);
+  color: var(--text2);
+  transform: translate(2px, -2px);
+}
+
+/* Coming soon badge */
+.mod-soon {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--text3);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.3s; }
+.d4 { animation-delay: 0.4s; }
+.d5 { animation-delay: 0.5s; }
+.d6 { animation-delay: 0.6s; }
+.d7 { animation-delay: 0.7s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  header { padding: 1.25rem 1.5rem; }
+  .hero  { padding: 3rem 1.5rem 2rem; }
+  .modules { padding: 0 1.5rem 3rem; }
+  .grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .mod-card.primary { grid-row: auto; grid-column: 1 / 3; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .mod-card.primary { grid-column: auto; }
+  .pat-strip { flex-wrap: wrap; }
+}
+
+/* ── END HOME CSS ── */
+
+/* ══ CUENTA COMÚN ══════════════════════════════════════════════════════════ */
+#comunSection .main-content{max-width:1400px;margin:0 auto;padding:2rem;}
+.comun-header-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.comun-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.comun-sub{font-size:13px;color:var(--text2);margin-top:3px;}
+
+/* Contracts panel */
+.contracts-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;}
+.contracts-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.contracts-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;}
+.contracts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.contract-item{background:var(--bg3);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;position:relative;}
+.contract-item:hover{background:var(--bg4);}
+.contract-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.contract-info{flex:1;min-width:0;}
+.contract-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.contract-amount{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);margin-top:2px;}
+.contract-cat{font-size:10px;padding:2px 6px;border-radius:6px;margin-top:3px;display:inline-block;}
+.contract-edit{position:absolute;top:8px;right:8px;font-size:11px;color:var(--text3);opacity:0;transition:opacity .15s;}
+.contract-item:hover .contract-edit{opacity:1;}
+.contract-add{border:1.5px dashed var(--border2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;color:var(--text3);font-size:13px;transition:all .2s;}
+.contract-add:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-bg);}
+.contracts-total{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;margin-top:.75rem;border-top:1px solid var(--border);}
+.contracts-total-label{font-size:13px;color:var(--text2);}
+.contracts-total-value{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--purple);}
+
+/* Contract modal */
+.contract-modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:480px;transform:translateY(16px);transition:transform .25s cubic-bezier(.4,0,.2,1);}
+.modal-overlay.open .contract-modal{transform:translateY(0);}
+
+/* Comun KPIs — reuse kpi-card but with purple accent */
+.comun-kpi.kpi-card::before{background:linear-gradient(90deg,var(--purple),transparent);}
+.comun-kpi .kpi-value{color:var(--purple);}
+
+/* Shared expense split */
+.split-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:6px 0;}
+.split-fill-jose{height:100%;background:var(--blue);border-radius:4px 0 0 4px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+
+/* Summary cards for nóminas */
+.nomina-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem;}
+.nomina-card{background:var(--bg3);border-radius:12px;padding:12px 14px;}
+.nomina-name{font-size:12px;color:var(--text2);margin-bottom:4px;}
+.nomina-amount{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--green);}
+.nomina-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+
+
+/* ── SYNC ── */
+.sync-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:1rem;font-size:12px;}
+.sync-status{flex:1;color:var(--text2);}
+.sync-status.ok{color:var(--green);}
+.sync-status.err{color:var(--red);}
+.sync-status.syncing{color:var(--gold);}
+.sync-btn{padding:6px 14px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.sync-btn:hover{border-color:var(--gold);color:var(--gold);}
+.sync-btn.primary{background:var(--gold);color:#0a0c0f;border-color:var(--gold);font-weight:500;}
+.sync-btn.primary:hover{background:var(--gold2);}
+.sync-setup{padding:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:1rem;}
+
+
+/* ══ INMUEBLES ══════════════════════════════════════════════════════════════ */
+.pisos-tabs{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap;}
+.piso-tab{padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.piso-tab.active{border-color:var(--teal);color:var(--teal);background:rgba(76,201,192,0.08);}
+.piso-tab:hover{border-color:var(--border2);color:var(--text);}
+
+.piso-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem;}
+.piso-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;}
+.piso-address{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;}
+.piso-meta{font-size:12px;color:var(--text2);margin-top:3px;display:flex;gap:12px;flex-wrap:wrap;}
+.piso-badge{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--text2);}
+.piso-badge.alquilado{border-color:rgba(76,175,125,0.4);color:var(--green);background:rgba(76,175,125,0.08);}
+.piso-badge.vacio{border-color:rgba(224,92,92,0.4);color:var(--red);background:rgba(224,92,92,0.08);}
+.piso-drive-link{font-size:11px;color:var(--text3);text-decoration:none;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;border:1px solid var(--border);transition:all .2s;}
+.piso-drive-link:hover{border-color:var(--gold);color:var(--gold);}
+
+.piso-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem;}
+.piso-kpi{background:var(--bg3);border-radius:10px;padding:12px 14px;}
+.piso-kpi-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.piso-kpi-value{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;}
+
+.habitaciones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
+.hab-card{background:var(--bg3);border-radius:10px;padding:10px 12px;border:1px solid var(--border);}
+.hab-name{font-size:11px;color:var(--text2);margin-bottom:4px;}
+.hab-amount{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--teal);}
+.hab-inquilino{font-size:10px;color:var(--text3);margin-top:2px;}
+
+.ingresos-gastos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;}
+
+.movimientos-piso{margin-top:1rem;}
+.mov-piso-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.mov-piso-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.mov-piso-info{flex:1;min-width:0;}
+.mov-piso-name{font-size:13px;color:var(--text);}
+.mov-piso-date{font-size:11px;color:var(--text3);}
+.mov-piso-amount{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;}
+.mov-piso-amount.pos{color:var(--green);}
+.mov-piso-amount.neg{color:var(--red);}
+
+.add-mov-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px dashed var(--border2);background:transparent;color:var(--text3);font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-top:8px;}
+.add-mov-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+.resumen-renta{background:var(--bg3);border-radius:10px;padding:1.25rem;margin-top:1rem;}
+.resumen-renta-title{font-size:13px;font-weight:500;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:6px;}
+.resumen-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);}
+.resumen-row.total{font-weight:600;font-size:13px;border-bottom:none;margin-top:4px;color:var(--text);}
+.resumen-row span:last-child{font-family:'DM Mono',monospace;}
+
+/* Mov modal piso */
+.mov-modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:440px;transform:translateY(16px);transition:transform .25s cubic-bezier(.4,0,.2,1);}
+.modal-overlay.open .mov-modal{transform:translateY(0);}
+
+@media(max-width:700px){
+  .piso-kpis{grid-template-columns:1fr 1fr;}
+  .habitaciones-grid{grid-template-columns:1fr 1fr;}
+  .ingresos-gastos-grid{grid-template-columns:1fr;}
+}
+
+
+/* ── ASIGNAR MOVIMIENTOS PISOS ── */
+.asignar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.asignar-filters{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
+.asignar-filter-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.asignar-filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-bg);}
+.asignar-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:10px;background:var(--bg3);margin-bottom:6px;border:1px solid var(--border);}
+.asignar-item.assigned{opacity:.45;border-style:dashed;}
+.asignar-item-left{min-width:0;}
+.asignar-item-concepto{font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.asignar-item-meta{font-size:11px;color:var(--text3);margin-top:2px;display:flex;gap:8px;}
+.asignar-item-amount{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;white-space:nowrap;}
+.asignar-item-amount.pos{color:var(--green);}
+.asignar-item-amount.neg{color:var(--red);}
+.asignar-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+.asignar-piso-btn{padding:4px 10px;border-radius:8px;border:1px solid var(--border2);background:transparent;font-size:11px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;color:var(--text2);white-space:nowrap;}
+.asignar-piso-btn:hover{border-color:var(--teal);color:var(--teal);background:rgba(76,201,192,0.08);}
+.asignar-piso-btn.auto{border-color:rgba(76,175,125,0.4);color:var(--green);background:rgba(76,175,125,0.08);}
+.asignar-skip-btn{padding:4px 8px;border-radius:8px;border:1px solid var(--border);background:transparent;font-size:11px;cursor:pointer;color:var(--text3);font-family:'DM Sans',sans-serif;}
+.asignar-skip-btn:hover{color:var(--red);border-color:var(--red);}
+.asignar-assigned-label{font-size:11px;color:var(--green);display:flex;align-items:center;gap:4px;}
+.asignar-empty{padding:3rem;text-align:center;color:var(--text3);font-size:13px;}
+.month-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.month-nav-btn{padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.month-nav-btn.active{border-color:var(--teal);color:var(--teal);}
+.month-nav-btn:hover{border-color:var(--border2);}
+
+
+/* ── BLOC DE NOTAS ── */
+.bloc-item{display:grid;grid-template-columns:90px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--bg3);margin-bottom:6px;border:1px solid var(--border);}
+.bloc-fecha{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);}
+.bloc-desc{font-size:13px;color:var(--text);}
+.bloc-cat{font-size:11px;color:var(--text2);padding:2px 8px;border-radius:6px;background:var(--bg4);}
+.bloc-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;transition:color .15s;}
+.bloc-del:hover{color:var(--red);}
+.bloc-empty{text-align:center;color:var(--text3);font-size:13px;padding:2rem;}
+
 </style>
 </head>
 <body>
@@ -466,6 +927,7 @@ input[type=file]{display:none;}
       </div>
     </div>
     <div class="header-right">
+      <button class="btn-sm" onclick="showHome()" style="flex-shrink:0">← Inicio</button>
       <div class="nav-selects">
         <select class="nav-select" id="yearSelect" onchange="onYearChange(this.value)"></select>
         <select class="nav-select" id="monthSelect" onchange="onMonthChange(this.value)"></select>
@@ -668,6 +1130,430 @@ input[type=file]{display:none;}
     </main>
   </div>
 
+
+  <!-- HOME SCREEN -->
+  <div id="homeScreen" style="display:none;position:relative;z-index:1;">
+<header>
+  <div class="brand">
+    <div class="brand-mark">G</div>
+    <div class="brand-text">
+      <div class="brand-title">Familia Gómez Cabanillas</div>
+      <div class="brand-sub">Control financiero · Zaragoza</div>
+    </div>
+  </div>
+  <div class="header-date" id="headerDate"></div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow fade-up d1">Panel principal</div>
+  <h1 class="hero-headline fade-up d2">
+    Tu patrimonio,<br><em>bajo control.</em>
+  </h1>
+  <p class="hero-sub fade-up d3">
+    Selecciona el módulo que quieres gestionar. Todos los datos se guardan en este navegador, privados y sin intermediarios.
+  </p>
+
+  <!-- Patrimonio strip — se actualiza con los datos guardados -->
+  <div class="pat-strip fade-up d4" id="patStrip">
+    <div class="pat-strip-item">
+      <div class="pat-strip-label">Patrimonio neto</div>
+      <div class="pat-strip-value gold" id="stripNet">—</div>
+    </div>
+    <div class="pat-strip-divider"></div>
+    <div class="pat-strip-item">
+      <div class="pat-strip-label">Activos totales</div>
+      <div class="pat-strip-value green" id="stripAssets">—</div>
+    </div>
+    <div class="pat-strip-divider"></div>
+    <div class="pat-strip-item">
+      <div class="pat-strip-label">Deudas</div>
+      <div class="pat-strip-value red" id="stripLiab">—</div>
+    </div>
+    <div class="pat-strip-divider"></div>
+    <div class="pat-strip-item">
+      <div class="pat-strip-label">Última actualización</div>
+      <div class="pat-strip-value" style="color:var(--text2);font-size:13px" id="stripDate">—</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- BACKUP BAR — shown on home screen -->
+  <div style="max-width:700px;margin:0 auto 2rem;padding:0 3rem">
+    <div class="sync-bar">
+      <span style="flex:1;font-size:12px;color:var(--text2)">💾 Copia de seguridad — guarda todos tus datos en un archivo</span>
+      <button class="sync-btn primary" onclick="exportarTodo()">⬇ Exportar todo</button>
+      <button class="sync-btn" onclick="document.getElementById('importFileIn').click()">⬆ Importar</button>
+      <input type="file" id="importFileIn" accept=".json" style="display:none" onchange="importarTodo(this)">
+    </div>
+    <div id="backupMsg" style="font-size:12px;margin-top:6px;display:none"></div>
+  </div>
+
+  <section class="modules">
+  <div class="modules-label">Módulos disponibles</div>
+  <div class="grid">
+
+    <!-- MIS FINANZAS — primary -->
+    <a class="mod-card c-personal primary fade-up d4" href="personal.html">
+      <div class="mod-icon">💼</div>
+      <div class="mod-name">Mis finanzas</div>
+      <div class="mod-desc">
+        Seguimiento mensual de tu cuenta Sabadell personal. Gastos, ingresos, inversiones, patrimonio, objetivos y criptomonedas.
+      </div>
+      <div class="mod-stats">
+        <div class="mod-stat">
+          <div class="mod-stat-label">Saldo Sabadell</div>
+          <div class="mod-stat-value blue" id="statSabadell">—</div>
+        </div>
+        <div class="mod-stat">
+          <div class="mod-stat-label">Tasa ahorro</div>
+          <div class="mod-stat-value green" id="statAhorro">—</div>
+        </div>
+        <div class="mod-stat">
+          <div class="mod-stat-label">Inversión total</div>
+          <div class="mod-stat-value purple" id="statInversion">—</div>
+        </div>
+        <div class="mod-stat">
+          <div class="mod-stat-label">Préstamo ING</div>
+          <div class="mod-stat-value" style="color:var(--red)" id="statPrestamo">—</div>
+        </div>
+      </div>
+      <div class="mod-tags">
+        <span class="mod-tag">Extractos Sabadell</span>
+        <span class="mod-tag">Patrimonio</span>
+        <span class="mod-tag">Objetivos</span>
+        <span class="mod-tag">Criptos</span>
+      </div>
+      <div class="mod-arrow">↗</div>
+    </a>
+
+    <!-- INMUEBLES -->
+    <a class="mod-card c-inmuebles fade-up d5" href="inmuebles.html">
+      <div class="mod-icon">🏠</div>
+      <div class="mod-name">Inmuebles</div>
+      <div class="mod-desc">
+        Gestión de los 3 pisos en alquiler y el apartamento. Ingresos, gastos deducibles y resumen para la declaración de la renta.
+      </div>
+      <div class="mod-tags">
+        <span class="mod-tag">El Noticiero</span>
+        <span class="mod-tag">Avd. Ayuso</span>
+        <span class="mod-tag">Avd. Navarra</span>
+        <span class="mod-tag">Apto. Balada</span>
+        <span class="mod-tag">Renta</span>
+      </div>
+      <div class="mod-arrow">↗</div>
+      <div class="mod-soon">En construcción</div>
+    </a>
+
+    <!-- CUENTA COMÚN -->
+    <div class="mod-card c-comun fade-up d6" onclick="showComunFromHome()">
+      <div class="mod-icon">👫</div>
+      <div class="mod-name">Cuenta común</div>
+      <div class="mod-desc">
+        Cuenta conjunta Sabadell con Noelia. Nóminas, hipoteca de Lagos de Millares, suministros y gastos del hogar.
+      </div>
+      <div class="mod-tags">
+        <span class="mod-tag">Nóminas</span>
+        <span class="mod-tag">Hipoteca</span>
+        <span class="mod-tag">Hogar</span>
+      </div>
+      <div class="mod-arrow">↗</div>
+    </div>
+
+    <!-- AHORRO -->
+    <a class="mod-card c-ahorro fade-up d7" href="ahorro.html">
+      <div class="mod-icon">💰</div>
+      <div class="mod-name">Cuenta de ahorro</div>
+      <div class="mod-desc">
+        13.000€ disponibles. Sin rentabilidad actual — aquí verás opciones para mejorar el rendimiento de tu dinero parado.
+      </div>
+      <div class="mod-tags">
+        <span class="mod-tag">13.000 €</span>
+        <span class="mod-tag">Liquidez</span>
+        <span class="mod-tag">Rentabilidad</span>
+      </div>
+      <div class="mod-arrow">↗</div>
+      <div class="mod-soon">Próximamente</div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  Control financiero familiar · Los datos nunca salen de este navegador · <span id="footerYear"></span>
+</footer>
+  </div>
+
+
+  <!-- CUENTA COMÚN SECTION -->
+  <div id="comunSection" style="display:none">
+    <main class="main-content" id="comunContent">
+
+      <div class="comun-header-bar">
+        <div>
+          <div class="comun-title">Cuenta común · Noelia &amp; José Antonio</div>
+          <div class="comun-sub">Sabadell · Gastos del hogar, nóminas e hipoteca</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-sm" onclick="document.getElementById('comunFileIn').click()">+ Añadir extracto</button>
+          <input type="file" id="comunFileIn" accept=".xlsx,.xls,.csv" style="display:none">
+        </div>
+      </div>
+      <!-- Month/Year tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:1.25rem;align-items:center;flex-wrap:wrap">
+        <div class="month-selector" id="comunMonthTabsTop" style="flex:1"></div>
+        <select class="nav-select" id="comunYearSelect" onchange="onComunYearChange(this.value)" style="flex-shrink:0"></select>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-strip" id="comunKpis" style="margin-bottom:1.5rem">
+        <div class="kpi-card comun-kpi"><div class="kpi-label">Ingresos conjuntos</div><div class="kpi-value" id="ckIncome" style="color:var(--green)">—</div><div class="kpi-delta" id="ckIncomeSub"></div></div>
+        <div class="kpi-card comun-kpi"><div class="kpi-label">Gastos del hogar</div><div class="kpi-value" id="ckExpense" style="color:var(--red)">—</div><div class="kpi-delta" id="ckExpenseSub"></div></div>
+        <div class="kpi-card comun-kpi"><div class="kpi-label">Contratos fijos/mes</div><div class="kpi-value" id="ckContracts" style="color:var(--purple)">—</div><div class="kpi-delta" id="ckContractsSub"></div></div>
+        <div class="kpi-card comun-kpi"><div class="kpi-label">Ahorro conjunto</div><div class="kpi-value" id="ckSavings" style="color:var(--gold)">—</div><div class="kpi-delta" id="ckSavingsPct"></div></div>
+        <div class="kpi-card comun-kpi"><div class="kpi-label">Saldo final</div><div class="kpi-value" id="ckBalance" style="color:var(--blue)">—</div><div class="kpi-delta" id="ckBalanceSub"></div></div>
+      </div>
+
+      <!-- Nóminas -->
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-header"><span class="card-title">💼 Nóminas</span><span class="card-badge" id="nominasMes">—</span></div>
+        <div class="nomina-cards" id="nominaCards">
+          <div class="nomina-card"><div class="nomina-name">José Antonio</div><div class="nomina-amount" id="nominaJose">—</div><div class="nomina-sub">Pensión SS</div></div>
+          <div class="nomina-card"><div class="nomina-name">Noelia</div><div class="nomina-amount" id="nominaNoelia">—</div><div class="nomina-sub">Nómina</div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);padding-top:8px;border-top:1px solid var(--border)">
+          <span>Total ingresos conjuntos</span>
+          <span style="font-family:'DM Mono',monospace;font-weight:500;color:var(--green)" id="nominaTotal">—</span>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:1rem">
+        <!-- Contratos fijos -->
+        <div class="contracts-panel">
+          <div class="contracts-header">
+            <span class="card-title">📋 Contratos y pagos fijos</span>
+            <button class="btn-sm" onclick="openContractModal(null)">+ Añadir</button>
+          </div>
+          <div class="contracts-grid" id="contractsGrid"></div>
+          <div class="contracts-total">
+            <span class="contracts-total-label">Total mensual fijo</span>
+            <span class="contracts-total-value" id="contractsTotal">—</span>
+          </div>
+        </div>
+
+        <!-- Saldo chart -->
+        <div class="card">
+          <div class="card-header"><span class="card-title">Evolución del saldo</span><span class="saldo-chip" id="comunSaldoChip">—</span></div>
+          <div class="chart-wrap"><canvas id="comunSaldoChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Movimientos -->
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-header">
+          <span class="card-title">Movimientos</span>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="month-selector" id="comunMonthSel"></div>
+            <span class="card-badge" id="comunTxnCount">—</span>
+          </div>
+        </div>
+        <div id="comunUploadHint" style="padding:2rem;text-align:center;color:var(--text3);font-size:13px">
+          Sube el extracto de la cuenta común del Sabadell para ver los movimientos
+          <br><br>
+          <button onclick="loadComunDemo()" style="padding:8px 18px;border-radius:8px;background:transparent;border:1px solid rgba(155,125,212,0.4);color:#9b7dd4;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">→ Ver con datos de enero 2026</button>
+        </div>
+        <div class="txn-scroll" style="display:none" id="comunTxnScroll">
+          <div class="txn-list" id="comunTxnList"></div>
+        </div>
+      </div>
+
+      <!-- Gráficas -->
+      <div class="grid-2" style="margin-bottom:1rem">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Evolución mensual</span></div>
+          <div class="chart-wrap"><canvas id="comunBarChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Gastos por categoría</span><span class="card-badge" id="comunCatTotal">—</span></div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:1rem;align-items:center">
+            <canvas id="comunDonut" width="140" height="140"></canvas>
+            <div id="comunCatBars" style="max-height:200px;overflow-y:auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gastos por persona -->
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-header"><span class="card-title">Gastos por persona</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="comunPersonaSplit">
+          <div>
+            <div style="font-size:12px;color:var(--blue);font-weight:500;margin-bottom:8px">👤 José (tarjeta 1014)</div>
+            <div id="comunJoseTotal" style="font-family:'DM Mono',monospace;font-size:20px;color:var(--blue)">—</div>
+            <div id="comunJoseBars"></div>
+          </div>
+          <div>
+            <div style="font-size:12px;color:var(--purple);font-weight:500;margin-bottom:8px">👤 Noelia (tarjeta 6012)</div>
+            <div id="comunNoeliaTotal" style="font-family:'DM Mono',monospace;font-size:20px;color:var(--purple)">—</div>
+            <div id="comunNoeliaTotal2"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas -->
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-header"><span class="card-title">Alertas</span></div>
+        <div class="alerts-list" id="comunAlerts"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- CONTRACT EDIT MODAL -->
+  <div class="modal-overlay" id="contractModalOverlay">
+    <div class="contract-modal">
+      <div class="modal-title" id="contractModalTitle">Nuevo contrato fijo</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:1.5rem">Seguros, hipoteca, suministros y cualquier pago mensual recurrente</div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Nombre</div>
+        <input class="modal-input" id="contractName" type="text" placeholder="ej: Seguro Mapfre Hogar">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Categoría</div>
+        <select class="modal-select" id="contractCat">
+          <option value="seguro">🛡 Seguro</option>
+          <option value="hipoteca">🏠 Hipoteca / Préstamo</option>
+          <option value="suministro">⚡ Suministro (luz, gas, agua...)</option>
+          <option value="telefonia">📱 Telefonía / Internet</option>
+          <option value="suscripcion">🔁 Suscripción</option>
+          <option value="comunidad">🏢 Comunidad de propietarios</option>
+          <option value="otro">📦 Otro</option>
+        </select>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Estado</div>
+        <select class="modal-select" id="contractStatus">
+          <option value="en_uso">✅ En uso</option>
+          <option value="dar_de_baja">⚠️ Pendiente dar de baja</option>
+          <option value="dado_de_baja">❌ Dado de baja</option>
+        </select>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Importe mensual (€)</div>
+        <input class="modal-input" id="contractAmount" type="number" step="0.01" min="0" placeholder="0,00">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Compañía / Proveedor</div>
+        <input class="modal-input" id="contractProvider" type="text" placeholder="ej: Mapfre, Endesa, Iberdrola...">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Identificador en extracto (para reconocerlo automáticamente)</div>
+        <input class="modal-input" id="contractKeyword" type="text" placeholder="ej: MAPFRE, ENDESA, IBERDROLA">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Nota</div>
+        <input class="modal-input" id="contractNote" type="text" placeholder="ej: Incluye hogar, vida y coche">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="contractDeleteBtn" style="color:var(--red);border-color:var(--red);display:none" onclick="deleteContract()">Eliminar</button>
+        <button class="btn-cancel" onclick="closeContractModal()">Cancelar</button>
+        <button class="btn-save" onclick="saveContract()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- INMUEBLES SECTION -->
+  <div id="pisosSection" style="display:none">
+    <main class="main-content" id="pisosContent">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700">Inmuebles</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px">Ingresos, gastos y rentabilidad de cada piso</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-sm" onclick="openBlocModal('pisos')">📝 Bloc</button>
+          <button class="btn-sm" onclick="document.getElementById('pisosFileIn').click()">+ Extracto cuenta pisos</button>
+          <input type="file" id="pisosFileIn" accept=".xlsx,.xls,.csv" style="display:none">
+        </div>
+      </div>
+      <!-- Month/year nav -->
+      <div id="pisosMonthNav" style="margin-bottom:1.25rem"></div>
+
+      <!-- Resumen general -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem" id="pisosResumenKpis"></div>
+
+      <!-- Tabs por piso -->
+      <div class="pisos-tabs">
+        <button class="piso-tab" id="tabAsignar" onclick="showPiso('asignar',this)" style="border-color:rgba(201,168,76,0.4);color:var(--gold)">📥 Asignar movimientos <span id="asignarBadge" style="display:none;background:var(--gold);color:#1e2128;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:4px">0</span></button>
+        <button class="piso-tab" onclick="showPiso('lagos',this)">🏡 Lagos de Millares</button>
+        <button class="piso-tab active" onclick="showPiso('noticiero',this)">🏠 El Noticiero</button>
+        <button class="piso-tab" onclick="showPiso('ayuso',this)">🏠 Avd. Ayuso</button>
+        <button class="piso-tab" onclick="showPiso('navarra',this)">🏠 Avd. Navarra</button>
+        <button class="piso-tab" onclick="showPiso('balada',this)">🏠 Apto. Balada</button>
+        <button class="piso-tab" onclick="showPiso('todos',this)" style="margin-left:auto">📊 Resumen gestor</button>
+      </div>
+
+      <!-- Piso content area -->
+      <div id="pisoPanels"></div>
+
+    </main>
+  </div>
+
+  <!-- MOV PISO MODAL -->
+  <div class="modal-overlay" id="movPisoModalOverlay">
+    <div class="mov-modal">
+      <div class="modal-title" id="movPisoTitle">Añadir movimiento</div>
+      <input type="hidden" id="movPisoPisoId">
+      <input type="hidden" id="movPisoEditIdx">
+      <div class="modal-sec">
+        <div class="modal-lbl">Tipo</div>
+        <div style="display:flex;gap:8px">
+          <button class="tt-btn active" data-tipo="ingreso" onclick="setMovTipo('ingreso',this)" style="flex:1;background:rgba(76,175,125,0.1);border-color:var(--green);color:var(--green)">↑ Ingreso</button>
+          <button class="tt-btn" data-tipo="gasto" onclick="setMovTipo('gasto',this)" style="flex:1">↓ Gasto</button>
+        </div>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Concepto</div>
+        <input class="modal-input" id="movPisoConcepto" type="text" placeholder="ej: Alquiler enero, Comunidad...">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Categoría</div>
+        <select class="modal-select" id="movPisoCat">
+          <option value="alquiler">🏠 Alquiler</option>
+          <option value="comunidad">🏢 Comunidad propietarios</option>
+          <option value="ibi">📋 IBI</option>
+          <option value="hipoteca">🏦 Hipoteca</option>
+          <option value="seguro">🛡 Seguro</option>
+          <option value="luz">⚡ Luz / Gas</option>
+          <option value="agua">💧 Agua</option>
+          <option value="telefono">📱 Teléfono</option>
+          <option value="gestion">👔 Gestión inmobiliaria</option>
+          <option value="reparacion">🔧 Reparación / Reforma</option>
+          <option value="otros">📦 Otros</option>
+          <option value="transferencia">↔ Transferencia entre cuentas</option>
+          <option value="provision">🏦 Provisión / Diferencia</option>
+        </select>
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Importe (€)</div>
+        <input class="modal-input" id="movPisoImporte" type="number" step="0.01" min="0" placeholder="0,00">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Fecha</div>
+        <input class="modal-input" id="movPisoFecha" type="date">
+      </div>
+      <div class="modal-sec">
+        <div class="modal-lbl">Nota (opcional)</div>
+        <input class="modal-input" id="movPisoNota" type="text" placeholder="">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="movPisoDeleteBtn" style="color:var(--red);border-color:var(--red);display:none" onclick="deleteMovPiso()">Eliminar</button>
+        <button class="btn-cancel" onclick="closeMovPisoModal()">Cancelar</button>
+        <button class="btn-save" onclick="saveMovPiso()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- NOTIFICACIONES PANEL -->
   <div class="notif-panel" id="notifPanel">
     <div class="notif-panel-header">
@@ -813,29 +1699,72 @@ function accountLabel(concepto) {
 
 // ── CATEGORIES ───────────────────────────────────────────────────────────────
 const CATS = [
-  {cat:'Pensión',         icon:'🏦',color:'#4caf7d', kw:['PENSION','JUBILACION']},
-  {cat:'Crowdfunding',    icon:'📈',color:'#5c9be0', kw:['LEMONWAY','CROWDFUND']},
-  {cat:'Bizum recibido',  icon:'💚',color:'#4caf7d', kw:['ABONO BIZUM']},
-  {cat:'Devolución',      icon:'↩', color:'#4caf7d', kw:['DEVOLUCION','DEVOLUCIÓN','REEMBOLSO']},
-  {cat:'Plan de pensiones',icon:'💎',color:'#9b7dd4',kw:['MAPFRE INVERSION','SEGUROS MAPFRE']},
-  {cat:'Inversión',       icon:'📊',color:'#5c9be0', kw:['TRADE REPUBLIC','INDEXA','BIT2ME','INDEXA CAPITAL']},
-  {cat:'Transferencia cuenta Iker',icon:'👦',color:'#4cc9c0',kw:['1912-00014607-51']},
-  {cat:'Transferencia cuenta común',icon:'🏠',color:'#9b7dd4',kw:['1912-00013020-38','1912-00010816-12']},
-  {cat:'Transferencia a inversión',icon:'💰',color:'#5c9be0',kw:['TRANSFERENCIA A JOSE ANTONIO','TRANSFERENCIA A JOSÉ ANTONIO']},
-  {cat:'Bizum enviado',   icon:'💸',color:'#e05c5c', kw:['PAGO BIZUM']},
-  {cat:'Formación',       icon:'📚',color:'#9b7dd4', kw:['HOTMART','SEQURA','OCEANO ATLANTICO','TRADEANDO']},
-  {cat:'Suscripciones',   icon:'🔁',color:'#c9a84c', kw:['APPLE.COM','OPENAI','CHATGPT','LEGALITAS','YOUTUBE','PICKAXE','BUDGETBAKERS','REAL MADRID']},
-  {cat:'Juegos',          icon:'🎮',color:'#9b7dd4', kw:['EPIC GAMES','RIOT','SUPERCELL','INSTANT GAMING']},
-  {cat:'Alimentación',    icon:'🛒',color:'#7dc96e', kw:['MERCADONA','DIA ','LIDL','ALDI','CARREFOUR','MARTIN MARTIN']},
-  {cat:'Restaurantes',    icon:'🍽', color:'#e07c5c',kw:['CAFETERIA','RESTAURANTE','BAR ','BURGER']},
-  {cat:'Deporte',         icon:'⚽',color:'#5ce0b4', kw:['PLAYTOMIC','MIRALBUENO EL OLIVAR','GYM','PISCINA','DECATHLON']},
-  {cat:'Transporte',      icon:'🚌',color:'#5cb8e0', kw:['URBANOS','RENFE','METRO','BUS ','TAXI']},
-  {cat:'Coche',           icon:'🚗',color:'#e0b45c', kw:['GASOLINERA','REPSOL','CEPSA','COMBUSTIBLE','ITV','MIRALBUENO EL OLIVAR-SAGITARIO']},
-  {cat:'Salud',           icon:'💊',color:'#e05c8a', kw:['FARMACIA','CLINICA','MÉDICO','HOSPITAL']},
-  {cat:'Donaciones',      icon:'❤', color:'#e05c5c', kw:['ONG','ALDEAS','UNICEF','CRUZ ROJA']},
-  {cat:'Efectivo — gastos diarios', icon:'💵',color:'#c9a84c', kw:['REINTEGRO','CAJERO']},
-  {cat:'Comisiones',      icon:'⚙', color:'#666',    kw:['COMISION','COMISIÓN']},
-  {cat:'Otros',           icon:'📦',color:'#666',    kw:[]},
+  // ── INGRESOS ──────────────────────────────────────────────────────────────
+  {cat:'Nómina José',      icon:'💼',color:'#4caf7d', kw:['ARCELORMITTAL']},
+  {cat:'Nómina Noelia',    icon:'💼',color:'#4cc9c0', kw:['FUNDACION SAN VALERO','SAN VALERO']},
+  {cat:'Pensión',          icon:'🏦',color:'#4caf7d', kw:['PENSION','JUBILACION']},
+  {cat:'Crowdfunding',     icon:'📈',color:'#5c9be0', kw:['LEMONWAY','CROWDFUND','MANGOPAY']},
+  {cat:'Bizum recibido',   icon:'💚',color:'#4caf7d', kw:['ABONO BIZUM']},
+  {cat:'Devolución',       icon:'↩', color:'#4caf7d', kw:['DEVOLUCION','DEVOLUCIÓN','REEMBOLSO']},
+  // ── GASTOS FIJOS ──────────────────────────────────────────────────────────
+  {cat:'Hipoteca',         icon:'🏠',color:'#c9a84c', kw:['PRESTAMOS ADEUDO CUOTA','HIPOTECA','EUROCAJARURAL']},
+  {cat:'Comunidad',        icon:'🏢',color:'#5cb8e0', kw:['PARQUE DE LOS TILOS','COMUNIDAD PROPIETARIOS','C.P.']},
+  {cat:'Suministros',      icon:'⚡',color:'#e0a05c', kw:['NATURGY','ENDESA','IBERDROLA','SEVILLANA','GAS NATURAL']},
+  {cat:'Telefonía',        icon:'📱',color:'#4cc9c0', kw:['ORANGE','MOVISTAR','MASMOVIL','VODAFONE','TELEFONOS']},
+  {cat:'Seguros Mapfre',   icon:'🛡',color:'#e05c5c', kw:['ADEUDO RECIBO MAPFRE','MAPFRE']},
+  {cat:'Gimnasio Noelia',  icon:'🏋',color:'#9b7dd4', kw:['FORUS SIGLO XXI','FORUS']},
+  {cat:'Gimnasio José',    icon:'🏋',color:'#5c9be0', kw:['DREAMFIT']},
+  // ── PLAN DE PENSIONES / INVERSIÓN ─────────────────────────────────────────
+  {cat:'Plan de pensiones',icon:'💎',color:'#9b7dd4', kw:['MAPFRE INVERSION','SEGUROS MAPFRE']},
+  {cat:'Inversión',        icon:'📊',color:'#5c9be0', kw:['TRADE REPUBLIC','INDEXA','BIT2ME','INDEXA CAPITAL']},
+  // ── TRANSFERENCIAS ────────────────────────────────────────────────────────
+  {cat:'Transferencia cuenta Iker',   icon:'👦',color:'#4cc9c0',kw:['1912-00014607-51']},
+  {cat:'Transferencia cuenta común',  icon:'🏠',color:'#9b7dd4',kw:['1912-00013020-38','1912-00010816-12']},
+  {cat:'Transferencia a inversión',   icon:'💰',color:'#5c9be0',kw:['TRANSFERENCIA A JOSE ANTONIO','TRANSFERENCIA A JOSÉ ANTONIO']},
+  {cat:'Tarjeta crédito',             icon:'💳',color:'#e0a05c',kw:['TARJETA CREDITO JOSE ANTONIO','LIQUIDACION TARJETA']},
+  {cat:'Bizum enviado',    icon:'💸',color:'#e05c5c', kw:['PAGO BIZUM']},
+  // ── ALIMENTACIÓN ──────────────────────────────────────────────────────────
+  {cat:'Comida Noelia (trabajo)', icon:'🥗',color:'#4cc9c0', kw:['DIA MALLEN','DIA MALLON']},
+  // ── 🏠 HOGAR ──────────────────────────────────────────────────────────────────
+  {cat:'Hipoteca / Alquiler',icon:'🏠',color:'#5c9be0',group:'Hogar',kw:['PRESTAMOS ADEUDO','HIPOTECA','ALQUILER']},
+  {cat:'Suministros',       icon:'💡',color:'#e0b45c',group:'Hogar',kw:['NATURGY','IBERDROLA','ENDESA','ORANGE','MASMOVIL','XFERA','AGUA ']},
+  {cat:'Comunidad',         icon:'🏢',color:'#7c5cc4',group:'Hogar',kw:['COMUNIDAD PROP','C.P. PARQUE','COM PROP']},
+  {cat:'Hogar y electrónica',icon:'📺',color:'#5c9be0',group:'Hogar',kw:['MM ZARAGOZA','MEDIAMARKT','DYSON','LEROY','IKEA','BRICOMART']},
+  // ── 🚗 VEHÍCULO ───────────────────────────────────────────────────────────────
+  {cat:'Gasolina',          icon:'⛽',color:'#e0a05c',group:'Vehículo',kw:['VASCO ARAGONESA','ES ALCAMPO LOS ENLACES','GOTTA LOS ENLACES']},
+  {cat:'Seguro vehículo',   icon:'🛡',color:'#9b7dd4',group:'Vehículo',kw:['SEGURO AUTO','SEGURO COCHE','SEGURO BMW','SEGURO MERCEDES','SEGURO TUCSON','DGT']},
+  {cat:'ITV / Taller',      icon:'🔧',color:'#e07c5c',group:'Vehículo',kw:['TALLER','ITV','NEUMATICOS','AUTORECAMBIOS']},
+  {cat:'Parking y autopista',icon:'🅿',color:'#5cb8e0',group:'Vehículo',kw:['PARKING','AUTOPISTA','PEAJE','SABA ','EMASA','INDIGO']},
+  {cat:'Transporte público', icon:'🚌',color:'#5cb8e0',group:'Vehículo',kw:['URBANOS','RENFE','METRO','BUS ','TAXI']},
+  // ── 🛒 ALIMENTACIÓN ───────────────────────────────────────────────────────────
+  {cat:'Supermercado',      icon:'🛒',color:'#7dc96e',group:'Alimentación',kw:['MERCADONA','LOS FRUTALES','CORP ALIM GUISSONA','COOP. SANTO CRISTO','ALCAMPO','SUPERCOR','EROSKI','LIDL','ALDI','CARREFOUR','MARTIN MARTIN','DIA ']},
+  {cat:'Restaurantes',      icon:'🍽',color:'#e07c5c',group:'Alimentación',kw:['TAGLIATELLA','TELEPIZZA','MCDONALDS','JUST EAT','GLOVO','MAS CLARAS','CAFETERIA','RESTAURANTE','BAR ','BURGER','VALOR ZARAGOZA']},
+  {cat:'Panadería',         icon:'🥖',color:'#e0b45c',group:'Alimentación',kw:['PANISHOP','PANADERIA TORRES','EXPLAGOSAL']},
+  {cat:'Desayunos Noelia',  icon:'☕',color:'#c9a84c',group:'Alimentación',kw:['PANISHOP SALVADOR ALLENDE']},
+  // ── 💊 SALUD ──────────────────────────────────────────────────────────────────
+  {cat:'Farmacia',          icon:'💊',color:'#e05c8a',group:'Salud',kw:['FARMACIA']},
+  {cat:'Médico / Clínica',  icon:'🏥',color:'#e05c5c',group:'Salud',kw:['CLINICA','MÉDICO','HOSPITAL','SANITAS','ADESLAS']},
+  {cat:'Gimnasio',          icon:'🏋',color:'#4caf7d',group:'Salud',kw:['FORUS','DREAMFIT','GIMNASIO']},
+  // ── 👨‍👩‍👦 FAMILIA ────────────────────────────────────────────────────────────────
+  {cat:'Juegos Iker',       icon:'🎮',color:'#9b7dd4',group:'Familia',kw:['NINTENDO','PLAYSTATION','STEAM','XBOX','GAME ']},
+  {cat:'Colegio / Educación',icon:'📚',color:'#5c9be0',group:'Familia',kw:['COLEGIO','ESCUELA','ACADEMIA','HOTMART','SEQURA']},
+  {cat:'Regalos',           icon:'🎁',color:'#e07c5c',group:'Familia',kw:['PANDORA','FNAC']},
+  // ── 👗 COMPRAS ────────────────────────────────────────────────────────────────
+  {cat:'Ropa y moda',       icon:'👗',color:'#9b7dd4',group:'Compras',kw:['PRIMOR','DRUNI','ARENAL','ZARA','PULL','MANGO','NUOVA ISRAEL','EL CORTE INGLES','CLAREL','GILCA']},
+  {cat:'Peluquería',        icon:'💇',color:'#e05c8a',group:'Compras',kw:['PELUQUER','BARBERIA','SALON DE BELLEZA']},
+  // ── 🔁 SUSCRIPCIONES Y OCIO ──────────────────────────────────────────────────
+  {cat:'Suscripciones',     icon:'🔁',color:'#c9a84c',group:'Ocio',kw:['APPLE.COM','OPENAI','CHATGPT','LEGALITAS','YOUTUBE','REAL MADRID']},
+  {cat:'Ocio y entretenimiento',icon:'🎬',color:'#7c5cc4',group:'Ocio',kw:['CINE','TEATRO','CONCIERTO','SPOTIFY','NETFLIX','PRIME VIDEO']},
+  {cat:'Viajes',            icon:'✈️',color:'#4caf7d',group:'Ocio',kw:['VUELING','IBERIA','RENFE AVE','HOTEL','AIRBNB','BOOKING']},
+  // ── 💰 FINANZAS ───────────────────────────────────────────────────────────────
+  {cat:'Seguros',           icon:'🛡',color:'#7c5cc4',group:'Finanzas',kw:['MAPFRE','SANTALUCIA','AXA','ALLIANZ']},
+  {cat:'Inversión',         icon:'📈',color:'#4caf7d',group:'Finanzas',kw:['TRADE REPUBLIC','INDEXA','URBANITAE','BIT2ME','REVOLUT']},
+  {cat:'Donaciones',        icon:'❤', color:'#e05c5c',group:'Finanzas',kw:['ONG','ALDEAS','UNICEF','CRUZ ROJA']},
+  {cat:'Formación',         icon:'📖',color:'#9b7dd4',group:'Finanzas',kw:['TRADEANDO','OCEANO ATLANTICO']},
+  // ── 📦 OTROS ─────────────────────────────────────────────────────────────────
+  {cat:'Efectivo',          icon:'💵',color:'#c9a84c',group:'Otros',kw:['REINTEGRO','CAJERO']},
+  {cat:'Comisiones',        icon:'⚙', color:'#666',   group:'Otros',kw:['COMISION','COMISIÓN']},
+  {cat:'Otros',             icon:'📦',color:'#666',   group:'Otros',kw:[]},
 ];
 function categorize(concepto) {
   const u = (concepto||'').toUpperCase();
@@ -936,8 +1865,8 @@ function renderMonth(key) {
     const tp=detectTipo(t.concepto,t.importe);
     if (t.exclude) return false;
     if (tp==='income') return true;
-    // Positive transfer manually marked as income
-    if (tp==='xfer' && t.importe>0 && t.transferType==='income-xfer') return true;
+    // Positive transfers not excluded count as income (unless tagged as inv)
+    if (tp==='xfer' && t.importe>0 && t.transferType!=='inv') return true;
     return false;
   });
   const expenses = enriched.filter(t => { const tp=detectTipo(t.concepto,t.importe); return tp==='expense' && !t.exclude; });
@@ -971,7 +1900,7 @@ function renderMonth(key) {
   const sctx = document.getElementById('saldoChart').getContext('2d');
   const g = sctx.createLinearGradient(0,0,0,180);
   g.addColorStop(0,'rgba(92,155,224,.25)'); g.addColorStop(1,'rgba(92,155,224,0)');
-  saldoInst = new Chart(sctx,{type:'line',data:{labels:sT.map(t=>t.fecha.substring(0,5)),datasets:[{data:sT.map(t=>t.saldo),borderColor:'#5c9be0',backgroundColor:g,fill:true,tension:.4,pointRadius:2,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#181c23',borderColor:'rgba(255,255,255,.1)',borderWidth:1,titleColor:'#8a8880',bodyColor:'#f0ede6',callbacks:{label:ctx=>' '+fmt(ctx.raw)}}},scales:{x:{grid:{display:false},ticks:{color:'#4a4845',font:{size:10},maxTicksLimit:8},border:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#4a4845',font:{size:10,family:'DM Mono'},callback:v=>fmt(v)},border:{display:false}}}}});
+  saldoInst = new Chart(sctx,{type:'line',data:{labels:sT.map(t=>t.fecha.substring(0,5)),datasets:[{data:sT.map(t=>t.saldo),borderColor:'#5c9be0',backgroundColor:g,fill:true,tension:.4,pointRadius:2,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,titleColor:'#6b7280',bodyColor:'#1a1c20',callbacks:{label:ctx=>' '+fmt(ctx.raw)}}},scales:{x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10},maxTicksLimit:8},border:{display:false}},y:{grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#6b7280',font:{size:10,family:'DM Mono'},callback:v=>fmt(v)},border:{display:false}}}}});
   const delta = sT.length>1 ? sT[sT.length-1].saldo - sT[0].saldo : 0;
   const chip = document.getElementById('saldoChip');
   chip.className='saldo-chip '+(delta>=0?'up':'down');
@@ -1005,7 +1934,7 @@ function renderMonth(key) {
   const dC=[...top5.map(c=>c.color),'#444'];
   const dL=[...top5.map(c=>c.cat),othT>0?'Otros':null].filter(Boolean);
   const dctx=document.getElementById('donutChart').getContext('2d');
-  donutInst=new Chart(dctx,{type:'doughnut',data:{labels:dL,datasets:[{data:dD,backgroundColor:dC,borderWidth:2,borderColor:'#111419'}]},options:{responsive:true,maintainAspectRatio:true,cutout:'70%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#181c23',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:ctx=>' '+fmt(ctx.raw)+' ('+Math.round(ctx.raw/totalExpense*100)+'%)'}}}}});
+  donutInst=new Chart(dctx,{type:'doughnut',data:{labels:dL,datasets:[{data:dD,backgroundColor:dC,borderWidth:2,borderColor:'#eef0f3'}]},options:{responsive:true,maintainAspectRatio:true,cutout:'70%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,callbacks:{label:ctx=>' '+fmt(ctx.raw)+' ('+Math.round(ctx.raw/totalExpense*100)+'%)'}}}}});
   document.getElementById('donutLegend').innerHTML=top5.map(c=>`
     <div class="legend-item">
       <span class="legend-label"><span class="legend-dot" style="background:${c.color}"></span>${c.cat}</span>
@@ -1955,9 +2884,9 @@ function renderPatrimonio() {
     type: 'doughnut',
     data: {
       labels: donutDefs.map(d=>d.name),
-      datasets: [{ data: donutDefs.map(d=>patData[d.id]?.value||0), backgroundColor: donutDefs.map(d=>d.color), borderWidth: 2, borderColor: '#111419' }]
+      datasets: [{ data: donutDefs.map(d=>patData[d.id]?.value||0), backgroundColor: donutDefs.map(d=>d.color), borderWidth: 2, borderColor: '#eef0f3' }]
     },
-    options: { responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{ legend:{ display:true, position:'right', labels:{ color:'#8a8880', font:{size:10}, boxWidth:8, padding:8 }}, tooltip:{ backgroundColor:'#181c23', callbacks:{ label: ctx => ` ${fmt(ctx.raw)} (${(ctx.raw/totalAssets*100).toFixed(0)}%)` }}}}
+    options: { responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{ legend:{ display:true, position:'right', labels:{ color:'#6b7280', font:{size:10}, boxWidth:8, padding:8 }}, tooltip:{ backgroundColor:'#ffffff', callbacks:{ label: ctx => ` ${fmt(ctx.raw)} (${(ctx.raw/totalAssets*100).toFixed(0)}%)` }}}}
   });
 
   // Fetch crypto prices (async, updates card when ready)
@@ -2044,8 +2973,8 @@ function renderPatHistory(currentNet, currentAssets, currentLiab) {
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:true, position:'bottom', labels:{ color:'#8a8880', font:{size:11}, boxWidth:10, padding:16 }}, tooltip:{ backgroundColor:'#181c23', borderColor:'rgba(255,255,255,.1)', borderWidth:1, callbacks:{ label:ctx=>` ${ctx.dataset.label}: ${fmt(ctx.raw)}` }}},
-      scales:{ x:{ grid:{display:false}, ticks:{color:'#4a4845'}, border:{display:false} }, y:{ grid:{color:'rgba(255,255,255,.04)'}, ticks:{color:'#4a4845',font:{family:'DM Mono',size:10},callback:v=>fmt(v)}, border:{display:false} }}
+      plugins:{ legend:{ display:true, position:'bottom', labels:{ color:'#6b7280', font:{size:11}, boxWidth:10, padding:16 }}, tooltip:{ backgroundColor:'#ffffff', borderColor:'rgba(0,0,0,0.1)', borderWidth:1, callbacks:{ label:ctx=>` ${ctx.dataset.label}: ${fmt(ctx.raw)}` }}},
+      scales:{ x:{ grid:{display:false}, ticks:{color:'#6b7280'}, border:{display:false} }, y:{ grid:{color:'rgba(0,0,0,0.06)'}, ticks:{color:'#6b7280',font:{family:'DM Mono',size:10},callback:v=>fmt(v)}, border:{display:false} }}
     }
   });
 }
@@ -2100,6 +3029,28 @@ document.getElementById('assetModalOverlay').addEventListener('click', e=>{ if(e
 
 // Init patrimonio data
 loadPat();
+
+// Cuenta común transaction editor — reuses the same modal
+function openComunEdit(editKey, idx) {
+  if (!comunCurrentMonth || !comunMonths[comunCurrentMonth]) return;
+  const t = comunMonths[comunCurrentMonth].txns[idx];
+  if (!t) return;
+  editingId = editKey; // reuse personal editingId slot
+  const e = comunEdits[editKey] || {};
+  const cat = e.cat ? (CATS.find(c=>c.cat===e.cat)||categorize(t.concepto)) : categorize(t.concepto);
+  document.getElementById('modalOrig').textContent = t.concepto;
+  document.getElementById('editName').value = e.name || t.concepto;
+  const sel = document.getElementById('editCat');
+  sel.innerHTML = CATS.map(c=>`<option value="${c.cat}" ${c.cat===cat.cat?'selected':''}>${c.icon} ${c.cat}</option>`).join('');
+  document.getElementById('ttSec').style.display = 'none';
+  document.getElementById('editExclude').checked = !!e.exclude;
+  document.getElementById('askNoeliaRow').style.display = 'block';
+  document.getElementById('editAskNoelia').checked = !!e.askNoelia;
+  // Override save to save into comunEdits instead of edits
+  document.getElementById('modalOverlay').dataset.mode = 'comun';
+  document.getElementById('modalOverlay').dataset.comunKey = editKey;
+  document.getElementById('modalOverlay').classList.add('open');
+}
 
 // ── COMPARISON & TIPS END ─────────────────────────────────────────────────────
 function openDrawer(type) {
@@ -2264,21 +3215,7 @@ document.getElementById('drawerOverlay').addEventListener('click', e=>{
 });
 
 // ── EXPORTAR / IMPORTAR TODO ─────────────────────────────────────────────────
-function exportarTodo() {
-  const payload = {
-    version: 1,
-    exportado: new Date().toISOString(),
-    months: allMonths,
-    edits: edits,
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  const fecha = new Date().toISOString().substring(0, 10);
-  a.download = `finanzas_jose_${fecha}.json`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
+// exportarTodo moved to backup section below
 
 document.getElementById('importIn').addEventListener('change', e => {
   const f = e.target.files[0];
@@ -2371,11 +3308,21 @@ function saveEdit() {
   const excl = document.getElementById('editExclude').checked;
   const ttBtn = document.querySelector('.tt-btn.active');
   const tt    = ttBtn ? ttBtn.dataset.tt : (edits[editingId]?.transferType || null);
+  const mode  = document.getElementById('modalOverlay').dataset.mode;
   markSaving();
-  edits[editingId] = { name, cat, exclude: excl, transferType: tt };
-  saveEdits();
-  closeModal();
-  renderMonth(currentMonth);
+  if (mode === 'comun') {
+    const askNoelia = document.getElementById('editAskNoelia').checked;
+    comunEdits[editingId] = { name, cat, exclude: excl, askNoelia };
+    saveComunEdits();
+    closeModal();
+    if (comunCurrentMonth) renderComunMonth(comunCurrentMonth);
+  } else {
+    edits[editingId] = { name, cat, exclude: excl, transferType: tt };
+    saveEdits();
+    closeModal();
+    renderMonth(currentMonth);
+  }
+  document.getElementById('modalOverlay').dataset.mode = '';
 }
 
 document.getElementById('modalOverlay').addEventListener('click', e=>{ if(e.target===document.getElementById('modalOverlay')) closeModal(); });
@@ -2611,7 +3558,7 @@ function renderYear(filterYear) {
         {label:'Ahorro',data:keys.map(k=>monthStats[k].savings),backgroundColor:'rgba(201,168,76,.7)',borderRadius:4},
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#8a8880',font:{size:11},boxWidth:10,padding:16}},tooltip:{backgroundColor:'#181c23',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmt(ctx.raw)}`}}},scales:{x:{grid:{display:false},ticks:{color:'#4a4845'},border:{display:false}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#4a4845',font:{family:'DM Mono',size:10},callback:v=>fmt(v)},border:{display:false}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#6b7280',font:{size:11},boxWidth:10,padding:16}},tooltip:{backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,callbacks:{label:ctx=>` ${ctx.dataset.label}: ${fmt(ctx.raw)}`}}},scales:{x:{grid:{display:false},ticks:{color:'#6b7280'},border:{display:false}},y:{grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#6b7280',font:{family:'DM Mono',size:10},callback:v=>fmt(v)},border:{display:false}}}}
   });
   document.getElementById('saldoChip').className='saldo-chip '+(totalSavings>=0?'up':'down');
   document.getElementById('saldoChip').textContent='Año: '+(totalSavings>=0?'▲ ':'▼ ')+fmt(Math.abs(totalSavings));
@@ -2629,7 +3576,7 @@ function renderYear(filterYear) {
   document.getElementById('catTotal').textContent = fmt(totalExpense)+' total';
   const top5Y=catSortedY.slice(0,5); const othY=catSortedY.slice(5).reduce((s,c)=>s+c.total,0);
   const dctx=document.getElementById('donutChart').getContext('2d');
-  donutInst=new Chart(dctx,{type:'doughnut',data:{labels:[...top5Y.map(c=>c.cat),othY>0?'Otros':null].filter(Boolean),datasets:[{data:[...top5Y.map(c=>c.total),othY>0?othY:null].filter(Boolean),backgroundColor:[...top5Y.map(c=>c.color),'#444'],borderWidth:2,borderColor:'#111419'}]},options:{responsive:true,maintainAspectRatio:true,cutout:'70%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#181c23',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:ctx=>' '+fmt(ctx.raw)+' ('+Math.round(ctx.raw/totalExpense*100)+'%)'}}}}});
+  donutInst=new Chart(dctx,{type:'doughnut',data:{labels:[...top5Y.map(c=>c.cat),othY>0?'Otros':null].filter(Boolean),datasets:[{data:[...top5Y.map(c=>c.total),othY>0?othY:null].filter(Boolean),backgroundColor:[...top5Y.map(c=>c.color),'#444'],borderWidth:2,borderColor:'#eef0f3'}]},options:{responsive:true,maintainAspectRatio:true,cutout:'70%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,callbacks:{label:ctx=>' '+fmt(ctx.raw)+' ('+Math.round(ctx.raw/totalExpense*100)+'%)'}}}}});
   document.getElementById('donutLegend').innerHTML=top5Y.map(c=>`<div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:${c.color}"></span>${c.cat}</span><span class="legend-val">${Math.round(c.total/totalExpense*100)}%</span></div>`).join('');
 
   // Investment breakdown (replace alerts section)
@@ -2694,13 +3641,11 @@ dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');co
 // ── INIT ─────────────────────────────────────────────────────────────────────
 loadEdits();
 
-// Restore saved months from localStorage — app resumes where it left off
+// Restore saved months and always start at HOME SCREEN
 (function() {
   const saved = loadSavedMonths();
   if (Object.keys(saved).length > 0) {
     allMonths = saved;
-    document.getElementById('upload-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
     const MONTH_ORDER = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
     const keys = Object.keys(allMonths).sort((a,b)=>{
       const [ma,ya]=a.split(' ');const [mb,yb]=b.split(' ');
@@ -2710,11 +3655,12 @@ loadEdits();
     rebuildMonthTabs();
     const titular = Object.values(allMonths)[0]?.titular||'';
     document.getElementById('headerSub').textContent = titular.split('*').map(p=>p.charAt(0)+p.slice(1).toLowerCase()).join(' ')||'José Antonio Gómez';
-    renderMonth(keys[keys.length-1]);
-  } else if (Object.keys(edits).length > 0) {
-    const banner = document.getElementById('savedBanner');
-    banner.style.display = 'flex';
   }
+  // Always start at home — never go straight to dashboard on load
+  document.getElementById('upload-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('homeScreen').style.display = 'block';
+  setTimeout(() => loadSummary(), 100);
 })();
 
 // ── DEMO ─────────────────────────────────────────────────────────────────────
@@ -2820,6 +3766,1720 @@ function loadDemo(){
     renderMonth(currentMonth);
   }, 200);
 }
+
+// ── HOME SCREEN ──────────────────────────────────────────────────────────────
+// ── DATE ──
+const now = new Date();
+document.getElementById('headerDate').textContent = now.toLocaleDateString('es-ES', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+document.getElementById('footerYear').textContent = now.getFullYear();
+
+// ── LOAD SUMMARY FROM PERSONAL MODULE localStorage ──
+function fmt(n) {
+  return new Intl.NumberFormat('es-ES', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(n);
+}
+
+function loadSummary() {
+  // Load patrimonio data from personal module
+  try {
+    const patData = JSON.parse(localStorage.getItem('finanzas_patrimonio_jose') || '{}');
+    const months  = JSON.parse(localStorage.getItem('finanzas_months_jose') || '{}');
+
+    // Patrimonio strip
+    const ASSETS_DEF = [
+      {id:'sabadell'},{id:'ing'},{id:'trade_cash'},{id:'trade_crypto'},
+      {id:'indexa'},{id:'mapfre'},{id:'urbanitae'}
+    ];
+    const totalAssets = ASSETS_DEF.reduce((s,d) => s + (patData[d.id]?.value || 0), 0);
+    const totalLiab   = patData.loan_ing?.value || 0;
+    const netWorth    = totalAssets - totalLiab;
+
+    if (totalAssets > 0) {
+      document.getElementById('stripNet').textContent    = fmt(netWorth);
+      document.getElementById('stripAssets').textContent = fmt(totalAssets);
+      document.getElementById('stripLiab').textContent   = fmt(totalLiab);
+
+      // Find most recent update
+      const updates = ASSETS_DEF.map(d => patData[d.id]?.updatedAt).filter(Boolean).sort().reverse();
+      if (updates.length) {
+        document.getElementById('stripDate').textContent = new Date(updates[0]).toLocaleDateString('es-ES', {day:'2-digit', month:'short', year:'numeric'});
+      }
+    } else {
+      document.getElementById('stripNet').textContent    = 'Sin datos';
+      document.getElementById('stripAssets').textContent = '—';
+      document.getElementById('stripLiab').textContent   = '—';
+      document.getElementById('stripDate').textContent   = 'Aún no configurado';
+    }
+
+    // Personal module stats
+    const MONTH_ORDER = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const keys = Object.keys(months).sort((a,b) => {
+      const [ma,ya]=a.split(' '); const [mb,yb]=b.split(' ');
+      if(ya!==yb) return (+ya)-(+yb);
+      return MONTH_ORDER.indexOf(ma)-MONTH_ORDER.indexOf(mb);
+    });
+
+    if (keys.length) {
+      const lastKey = keys[keys.length-1];
+      const txns = months[lastKey].txns || [];
+
+      // Saldo
+      const lastSaldo = txns.filter(t=>t.saldo!=null).slice(-1)[0]?.saldo || 0;
+      document.getElementById('statSabadell').textContent = fmt(lastSaldo);
+
+      // Tasa ahorro (rough from last month)
+      const edits = JSON.parse(localStorage.getItem('finanzas_edits_jose') || '{}');
+      let income = 0, expense = 0;
+      txns.forEach((t, i) => {
+        const key = `${lastKey}::${i}`;
+        const e = edits[key] || {};
+        const excl = e.exclude || false;
+        const u = t.concepto.toUpperCase();
+        if (!excl && t.importe > 0 && !u.includes('TRASPASO') && !u.includes('TRANSFERENCIA A')) income += t.importe;
+        if (!excl && t.importe < 0 && !u.includes('TRASPASO') && !u.includes('TRANSFERENCIA A') && !u.includes('MAPFRE') && !u.includes('TRADE REPUBLIC') && !u.includes('BIT2ME')) expense += Math.abs(t.importe);
+      });
+      const savingsPct = income > 0 ? ((income - expense) / income * 100).toFixed(1) : 0;
+      document.getElementById('statAhorro').textContent = savingsPct + '%';
+
+      // Inversión total
+      const inv = ['indexa','mapfre','urbanitae','trade_crypto'].reduce((s,id) => s + (patData[id]?.value || 0), 0);
+      document.getElementById('statInversion').textContent = fmt(inv);
+
+      // Préstamo
+      const loan = patData.loan_ing?.value || 10028;
+      document.getElementById('statPrestamo').textContent = fmt(loan);
+    }
+
+    // Cuenta común quick stats
+    try {
+      const comunM = JSON.parse(localStorage.getItem('finanzas_comun_months')||'{}');
+      const MO = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+      const cKeys = Object.keys(comunM).sort((a,b)=>{
+        const [ma,ya]=a.split(' ');const [mb,yb]=b.split(' ');
+        if(ya!==yb) return (+ya)-(+yb);
+        return MO.indexOf(ma)-MO.indexOf(mb);
+      });
+      if (cKeys.length) {
+        const lastCK = cKeys[cKeys.length-1];
+        const cTxns = comunM[lastCK].txns||[];
+        const lastCS = cTxns.filter(t=>t.saldo!=null).slice(-1)[0]?.saldo||0;
+        const comunDesc = document.querySelector('.mod-card.c-comun .mod-desc');
+        if(comunDesc) comunDesc.innerHTML = `Cuenta conjunta Sabadell con Noelia. Nóminas, hipoteca y gastos del hogar.<br><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--purple);margin-top:4px;display:block">Saldo: ${fmt(lastCS)} · ${cKeys.length} ${cKeys.length===1?'mes':'meses'} cargados</span>`;
+      }
+    } catch(e2){}
+
+  } catch(e) {
+    console.log('Sin datos guardados aún');
+  }
+}
+
+loadSummary();
+
+// ── NAVIGATION ──
+// If modules aren't built yet, show a friendly message instead of 404
+document.querySelectorAll('.mod-card').forEach(card => {
+  card.addEventListener('click', e => {
+    const href = card.getAttribute('href');
+    // personal.html is the existing dashboard
+    if (href === 'personal.html') return; // let it navigate
+    // Others not built yet — show message
+    if (card.querySelector('.mod-soon')) {
+      e.preventDefault();
+      showComingSoon(card.querySelector('.mod-name').textContent.trim());
+    }
+  });
+});
+
+function showComingSoon(name) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:999;display:flex;align-items:center;justify-content:center;';
+  overlay.innerHTML = `
+    <div style="background:#ffffff;border:1px solid rgba(0,0,0,0.12);border-radius:20px;padding:2.5rem;max-width:400px;text-align:center">
+      <div style="font-size:36px;margin-bottom:1rem">🚧</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px">${name}</div>
+      <div style="font-size:14px;color:#8a8880;line-height:1.6;margin-bottom:1.5rem">Este módulo está en construcción.<br>Volviendo a Mis Finanzas por ahora.</div>
+      <button onclick="this.closest('div[style]').remove()" style="padding:10px 24px;border-radius:8px;background:var(--gold);color:#ffffff;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer">Cerrar</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.remove(); });
+}
+
+function showHome() {
+  // Hide all sections
+  document.getElementById('upload-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('patrimonioSection').style.display = 'none';
+  document.getElementById('objetivosSection').style.display = 'none';
+  document.getElementById('homeScreen').style.display = 'block';
+  currentMonth = '__home__';
+  loadSummary();
+}
+
+function hideHome() {
+  document.getElementById('homeScreen').style.display = 'none';
+}
+
+// Override mod-card clicks for internal navigation
+document.addEventListener('DOMContentLoaded', () => {
+  const personalCard = document.querySelector('.mod-card.c-personal');
+  if (personalCard) {
+    personalCard.removeAttribute('href');
+    personalCard.addEventListener('click', () => {
+      hideHome();
+      // Go to app or upload depending on whether data exists
+      const hasMonths = Object.keys(allMonths).length > 0;
+      if (hasMonths) {
+        document.getElementById('app').style.display = 'block';
+        const MONTH_ORDER = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        const keys = Object.keys(allMonths).sort((a,b) => {
+          const [ma,ya]=a.split(' ');const [mb,yb]=b.split(' ');
+          if(ya!==yb) return (+ya)-(+yb);
+          return MONTH_ORDER.indexOf(ma)-MONTH_ORDER.indexOf(mb);
+        });
+        renderMonth(keys[keys.length-1]);
+      } else {
+        document.getElementById('upload-screen').style.display = 'flex';
+      }
+    });
+  }
+});
+
+
+// ══ CUENTA COMÚN ═════════════════════════════════════════════════════════════
+const LS_COMUN_MONTHS    = 'finanzas_comun_months';
+const LS_COMUN_EDITS     = 'finanzas_comun_edits';
+const LS_CONTRACTS       = 'finanzas_contracts_jose';
+
+let comunMonths = {}, comunCurrentMonth = '', comunEdits = {};
+let contracts = [];
+let editingContractId = null;
+let comunSaldoInst = null;
+
+// ── CONTRACTS ──────────────────────────────────────────────────────────────
+const CONTRACT_CAT_CONFIG = {
+  seguro:      { icon:'🛡',  color:'#5c9be0', bg:'rgba(92,155,224,0.1)'  },
+  hipoteca:    { icon:'🏠',  color:'#c9a84c', bg:'rgba(201,168,76,0.1)'  },
+  suministro:  { icon:'⚡',  color:'#e0a05c', bg:'rgba(224,160,92,0.1)'  },
+  telefonia:   { icon:'📱',  color:'#4cc9c0', bg:'rgba(76,201,192,0.1)'  },
+  suscripcion: { icon:'🔁',  color:'#9b7dd4', bg:'rgba(155,125,212,0.1)' },
+  comunidad:   { icon:'🏢',  color:'#4caf7d', bg:'rgba(76,175,125,0.1)'  },
+  otro:        { icon:'📦',  color:'#888',    bg:'rgba(136,136,136,0.1)' },
+};
+
+// Contracts pre-loaded with real data from Sabadell extract + Excel Jan 2026
+const DEFAULT_CONTRACTS = [
+  // GASTOS FIJOS
+  { id:'c1', name:'Hipoteca Lagos de Millares', cat:'hipoteca', amount:802.02, provider:'Sabadell', keyword:'PRESTAMOS ADEUDO CUOTA', note:'Vivienda habitual — cuota enero 2026' },
+  { id:'c2', name:'Comunidad C.P. Parque de los Tilos', cat:'comunidad', amount:120.85, provider:'Comunidad propietarios', keyword:'C.P. PARQUE DE LOS TILOS', note:'Comunidad vivienda habitual' },
+  { id:'c3', name:'Gas/Electricidad (Naturgy)', cat:'suministro', amount:83.04, provider:'Naturgy', keyword:'GAS NATURGY', note:'Suministro eléctrico y gas' },
+  { id:'c4', name:'Internet + Teléfono + Móviles (Orange)', cat:'telefonia', amount:132.06, provider:'Orange', keyword:'TELEFONOS ORANGE', note:'Tarifa familiar internet + móviles' },
+  // SEGUROS MAPFRE
+  // MAPFRE — UN SOLO CARGO MENSUAL DE 238,25€ CON 6 SEGUROS INCLUIDOS
+  { id:'c5',  name:'Mapfre — Asistencia Sanitaria (Noelia + Iker)', cat:'seguro', amount:93.52, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'Incluido en el cargo mensual Mapfre 238,25€' },
+  { id:'c6',  name:'Mapfre — Seguro coche BMW (Hugo)', cat:'seguro', amount:56.04, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'Coche a nombre de Noelia, lo usa Hugo' },
+  { id:'c7',  name:'Mapfre — Seguro coche Mercedes CLA (José)', cat:'seguro', amount:38.23, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'Coche de José' },
+  { id:'c8',  name:'Mapfre — Seguro coche TUCSON (José)', cat:'seguro', amount:28.31, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'Coche de José' },
+  { id:'c9',  name:'Mapfre — Decesos (José + Noelia)', cat:'seguro', amount:15.81, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'Seguro de decesos familiar' },
+  { id:'c10', name:'Mapfre — Patinete Xiaomi ⚠ pendiente baja', cat:'seguro', amount:6.34, provider:'Mapfre', keyword:'ADEUDO RECIBO MAPFRE', note:'PENDIENTE CANCELAR — ya no se usa, no se puede dar de baja hasta que cumpla' },
+  // GASTOS DOMICILIADOS
+  { id:'c15', name:'Gimnasio Noelia (Forus)', cat:'otro', amount:39.16, provider:'Forus Siglo XXI', keyword:'FORUS SIGLO XXI', note:'Cuota mensual gimnasio Noelia' },
+  { id:'c16', name:'Gimnasio José (Dreamfit)', cat:'otro', amount:17.30, provider:'Dreamfit', keyword:'DREAMFIT', note:'Cuota mensual gimnasio José' },
+  // TARJETA CRÉDITO
+  { id:'c17', name:'Tarjeta crédito José Antonio', cat:'otro', amount:0, provider:'Sabadell', keyword:'TARJETA CREDITO JOSE ANTONIO', note:'Variable — liquidación mensual tarjeta' },
+];
+
+function loadContracts() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_CONTRACTS)||'null');
+    contracts = saved || JSON.parse(JSON.stringify(DEFAULT_CONTRACTS));
+  } catch { contracts = JSON.parse(JSON.stringify(DEFAULT_CONTRACTS)); }
+}
+function saveContracts() {
+  try { localStorage.setItem(LS_CONTRACTS, JSON.stringify(contracts)); } catch(e){}
+}
+function loadComunMonths() {
+  try { comunMonths = JSON.parse(localStorage.getItem(LS_COMUN_MONTHS)||'{}'); } catch { comunMonths={}; }
+}
+function saveComunMonths() {
+  try { localStorage.setItem(LS_COMUN_MONTHS, JSON.stringify(comunMonths)); } catch(e){}
+}
+function loadComunEdits() {
+  try { comunEdits = JSON.parse(localStorage.getItem(LS_COMUN_EDITS)||'{}'); } catch { comunEdits={}; }
+}
+function saveComunEdits() {
+  try { localStorage.setItem(LS_COMUN_EDITS, JSON.stringify(comunEdits)); } catch(e){}
+}
+
+function comunTxnKey(mk, idx) { return `${mk}::${idx}`; }
+
+// ── NAVIGATION ──
+function showComun() {
+  document.querySelectorAll('.main-content:not(#comunContent):not(#patrimonioContent):not(#objetivosContent)').forEach(el=>el.style.display='none');
+  document.getElementById('patrimonioSection').style.display='none';
+  document.getElementById('objetivosSection').style.display='none';
+  document.getElementById('homeScreen').style.display='none';
+  document.getElementById('upload-screen').style.display='none';
+  document.getElementById('app').style.display='none';
+  document.getElementById('comunSection').style.display='block';
+  currentMonth = '__comun__';
+  loadContracts();
+  loadComunMonths();
+  loadComunEdits();
+  renderContracts();
+  if (Object.keys(comunMonths).length) {
+    const keys = getComunMonthKeys();
+    renderComunMonth(keys[keys.length-1]);
+  } else {
+    renderComunEmpty();
+  }
+}
+function hideComun() {
+  document.getElementById('comunSection').style.display='none';
+}
+
+function getComunMonthKeys() {
+  const MO = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return Object.keys(comunMonths).sort((a,b)=>{
+    const [ma,ya]=a.split(' ');const [mb,yb]=b.split(' ');
+    if(ya!==yb) return (+ya)-(+yb);
+    return MO.indexOf(ma)-MO.indexOf(mb);
+  });
+}
+
+// ── FILE HANDLING ──
+document.getElementById('comunFileIn').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const newMonths = parseSabadell(ev.target.result); // reuse same parser
+    if (!Object.keys(newMonths).length) { alert('No se encontraron movimientos. Comprueba el formato.'); return; }
+    Object.assign(comunMonths, newMonths);
+    saveComunMonths();
+    const keys = getComunMonthKeys();
+    renderComunMonthTabs();
+    renderComunMonth(keys[keys.length-1]);
+    document.getElementById('comunUploadHint').style.display='none';
+    document.getElementById('comunTxnScroll').style.display='block';
+  };
+  reader.readAsBinaryString(f);
+  e.target.value='';
+});
+
+function renderComunEmpty() {
+  document.getElementById('ckIncome').textContent='—';
+  document.getElementById('ckExpense').textContent='—';
+  document.getElementById('ckContracts').textContent=fmt(contracts.reduce((s,c)=>s+c.amount,0));
+  document.getElementById('ckContractsSub').textContent=contracts.length+' contratos configurados';
+  document.getElementById('ckSavings').textContent='—';
+  document.getElementById('ckBalance').textContent='—';
+  document.getElementById('nominaJose').textContent='—';
+  document.getElementById('nominaNoelia').textContent='—';
+  document.getElementById('nominaTotal').textContent='—';
+}
+
+function renderComunMonthTabs() {
+  const keys = getComunMonthKeys();
+  // Build year list
+  const years = [...new Set(keys.map(k=>k.split(' ')[1]))].sort();
+  const yearSel = document.getElementById('comunYearSelect');
+  if(yearSel) {
+    const curYear = comunCurrentMonth ? comunCurrentMonth.split(' ')[1] : years[years.length-1];
+    yearSel.innerHTML = years.map(y=>`<option value="${y}" ${y===curYear?'selected':''}>${y}</option>`).join('');
+  }
+  // Month tabs filtered by selected year
+  const selYear = yearSel?.value || years[years.length-1];
+  const filtered = keys.filter(k=>k.split(' ')[1]===selYear);
+  const topSel = document.getElementById('comunMonthTabsTop');
+  if(topSel) topSel.innerHTML = filtered.map(k=>`<button class="month-btn ${k===comunCurrentMonth?'active':''}" onclick="renderComunMonth('${k}')">${k.split(' ')[0]}</button>`).join('');
+  // Also update inline selector
+  const inlineSel = document.getElementById('comunMonthSel');
+  if(inlineSel) inlineSel.innerHTML = filtered.map(k=>`<button class="month-btn ${k===comunCurrentMonth?'active':''}" data-key="${k}" onclick="renderComunMonth('${k}')">${k}</button>`).join('');
+}
+
+function onComunYearChange(year) {
+  const keys = getComunMonthKeys().filter(k=>k.split(' ')[1]===year);
+  if(keys.length) renderComunMonth(keys[keys.length-1]);
+  renderComunMonthTabs();
+}
+
+function renderComunMonth(key) {
+  comunCurrentMonth = key;
+  document.querySelectorAll('#comunMonthSel .month-btn').forEach(b=>b.classList.toggle('active', b.dataset.key===key));
+  document.getElementById('nominasMes').textContent = key;
+  document.getElementById('comunUploadHint').style.display='none';
+  document.getElementById('comunTxnScroll').style.display='block';
+
+  const {txns} = comunMonths[key];
+  // Keywords
+  const JOSE_KEYWORDS  = ['ARCELORMITTAL','PENSION GOMEZ CABANILLAS','GOMEZ CABANILLAS JOSE ANTONIO'];
+  const NOELIA_KEYWORDS= ['FUNDACION SAN VALERO','SAN VALERO','NOMINA NOELIA','NOELIA MORALES'];
+  const INCOME_IGNORE  = ['TRASPASO','TRANSFERENCIA A'];
+  // Apply edits
+  const enrichedComun = txns.map((t,i) => {
+    const e = comunEdits[comunTxnKey(key,i)] || {};
+    return { ...t, _cat: e.cat ? (CATS.find(c=>c.cat===e.cat)||categorize(t.concepto)) : categorize(t.concepto), _excl: !!e.exclude };
+  });
+  const income  = enrichedComun.filter(t=>t.importe>0 && !INCOME_IGNORE.some(k=>t.concepto.toUpperCase().includes(k)) && !t._excl);
+  const expense = enrichedComun.filter(t=>t.importe<0 && !['TRASPASO','TRANSFERENCIA A'].some(k=>t.concepto.toUpperCase().includes(k)) && !t._excl);
+
+  const totalIncome  = income.reduce((s,t)=>s+t.importe,0);
+  const totalExpense = expense.reduce((s,t)=>s+Math.abs(t.importe),0);
+  const savings      = totalIncome - totalExpense;
+  const lastSaldo    = txns.filter(t=>t.saldo!=null).slice(-1)[0]?.saldo||0;
+  const savingsPct   = totalIncome>0?(savings/totalIncome*100):0;
+  const contractsTotal = contracts.reduce((s,c)=>s+c.amount,0);
+
+  // Detect José pension
+  const joseIncome = income.filter(t=>JOSE_KEYWORDS.some(k=>t.concepto.toUpperCase().includes(k))).reduce((s,t)=>s+t.importe,0);
+  const noeliaIncome = income.filter(t=>NOELIA_KEYWORDS.some(k=>t.concepto.toUpperCase().includes(k))).reduce((s,t)=>s+t.importe,0);
+  const otherIncome = totalIncome - joseIncome - noeliaIncome;
+
+  // KPIs
+  document.getElementById('ckIncome').textContent = fmt(totalIncome);
+  document.getElementById('ckIncomeSub').textContent = income.length+' ingresos';
+  document.getElementById('ckExpense').textContent = fmt(totalExpense);
+  document.getElementById('ckExpenseSub').textContent = expense.length+' transacciones';
+  document.getElementById('ckContracts').textContent = fmt(contractsTotal);
+  document.getElementById('ckContractsSub').textContent = contracts.length+' contratos · '+(contractsTotal/totalIncome*100).toFixed(0)+'% ingresos';
+  document.getElementById('ckSavings').textContent = fmt(savings);
+  document.getElementById('ckSavingsPct').textContent = (savingsPct>=0?'+':'')+savingsPct.toFixed(1)+'% tasa ahorro';
+  document.getElementById('ckBalance').textContent = fmt(lastSaldo);
+  document.getElementById('ckBalanceSub').textContent = 'saldo actual';
+
+  // Nóminas
+  document.getElementById('nominaJose').textContent = joseIncome>0?fmt(joseIncome):'No detectada';
+  document.getElementById('nominaNoelia').textContent = noeliaIncome>0?fmt(noeliaIncome):(otherIncome>0?fmt(otherIncome):'No detectada');
+  document.getElementById('nominaTotal').textContent = fmt(totalIncome);
+
+  // Saldo chart
+  function parseSpD(s){const p=(s||'').split('/');return p.length===3?new Date(+p[2],+p[1]-1,+p[0]):new Date(0);}
+  const sT = txns.filter(t=>t.saldo!=null).slice().sort((a,b)=>parseSpD(a.fecha)-parseSpD(b.fecha));
+  if(comunSaldoInst) comunSaldoInst.destroy();
+  const sctx = document.getElementById('comunSaldoChart').getContext('2d');
+  const grad = sctx.createLinearGradient(0,0,0,180);
+  grad.addColorStop(0,'rgba(155,125,212,.25)'); grad.addColorStop(1,'rgba(155,125,212,0)');
+  comunSaldoInst = new Chart(sctx,{type:'line',data:{labels:sT.map(t=>t.fecha.substring(0,5)),datasets:[{data:sT.map(t=>t.saldo),borderColor:'#9b7dd4',backgroundColor:grad,fill:true,tension:.4,pointRadius:2,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#ffffff',borderColor:'rgba(0,0,0,0.1)',borderWidth:1,callbacks:{label:ctx=>' '+fmt(ctx.raw)}}},scales:{x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10},maxTicksLimit:8},border:{display:false}},y:{grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#6b7280',font:{size:10,family:'DM Mono'},callback:v=>fmt(v)},border:{display:false}}}}});
+  const delta = sT.length>1?sT[sT.length-1].saldo-sT[0].saldo:0;
+  const chip = document.getElementById('comunSaldoChip');
+  chip.className='saldo-chip '+(delta>=0?'up':'down');
+  chip.textContent=(delta>=0?'▲ ':'▼ ')+fmt(Math.abs(delta));
+
+  // Categories
+  const catMap={};
+  expense.forEach(t=>{const c=t._cat;const n=c.cat;if(!catMap[n])catMap[n]={...c,total:0};catMap[n].total+=Math.abs(t.importe);});
+  const catSorted=Object.values(catMap).sort((a,b)=>b.total-a.total);
+  const maxC=catSorted[0]?.total||1;
+  document.getElementById('comunCatBars').innerHTML=catSorted.map(c=>`
+    <div class="cat-item">
+      <div class="cat-row"><span class="cat-name"><span class="cat-dot" style="background:${c.color}"></span>${c.icon} ${c.cat}</span><span class="cat-amount">${fmt(c.total)}</span></div>
+      <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:0%;background:${c.color}" data-w="${(c.total/maxC*100).toFixed(1)}"></div></div>
+    </div>`).join('');
+  setTimeout(()=>document.querySelectorAll('#comunCatBars .cat-bar-fill').forEach(el=>el.style.width=el.dataset.w+'%'),50);
+  document.getElementById('comunCatTotal').textContent=fmt(totalExpense);
+
+  // Transactions — preserve original index for editor
+  document.getElementById('comunTxnCount').textContent=txns.length+' movimientos';
+  const sortedWithIdx = enrichedComun.map((t,i)=>({...t,_origIdx:i})).sort((a,b)=>parseSpD(b.fecha)-parseSpD(a.fecha));
+  document.getElementById('comunTxnList').innerHTML=sortedWithIdx.map(t=>{
+    const origIdx = t._origIdx;
+    const cat = t._cat;
+    const isIncome = t.importe>0;
+    const cls = t._excl?'excl':isIncome?'pos':INCOME_IGNORE.some(k=>t.concepto.toUpperCase().includes(k))?'transfer':'neg';
+    const matchedContract = contracts.find(c=>c.keyword&&t.concepto.toUpperCase().includes(c.keyword.toUpperCase()));
+    const u = t.concepto.toUpperCase();
+    const isJose   = u.includes('1014');
+    const isNoelia = u.includes('6012');
+    const ownerTag = isJose
+      ? `<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(92,155,224,0.18);color:#5c9be0;font-weight:500">👤 José</span>`
+      : isNoelia
+      ? `<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(155,125,212,0.18);color:#9b7dd4;font-weight:500">👤 Noelia</span>`
+      : '';
+    const editKey = comunTxnKey(comunCurrentMonth, origIdx);
+    const ed = comunEdits[editKey] || {};
+    const displayName = ed.name || t.concepto;
+    return `<div class="txn-item${t._excl?' excluded':''}" onclick="openComunEdit('${editKey}',${origIdx})">
+      <div class="txn-icon" style="background:${cat.color}22;color:${cat.color}">${cat.icon}</div>
+      <div class="txn-info">
+        <div class="txn-name">${displayName.substring(0,44)}${ed.name?` <span style="font-size:10px;color:var(--gold)">✎</span>`:''}</div>
+        <div class="txn-meta" style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">
+          <span class="tag">${cat.cat}</span>
+          <span style="font-size:11px;color:var(--text3)">${t.fecha}</span>
+          ${ownerTag}
+          ${t._excl?'<span class="tag excluded-tag">excluido</span>':''}
+          ${ed.askNoelia?'<span style="font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(224,180,92,0.2);color:var(--amber);font-weight:600">❓ Preguntar a Noelia</span>':''}
+          ${matchedContract&&!t._excl?`<span style="font-size:10px;padding:2px 6px;border-radius:10px;background:var(--purple-bg);color:var(--purple)">📋 ${matchedContract.name.substring(0,20)}</span>`:''}
+        </div>
+      </div>
+      <div class="txn-amount ${cls}">${t.importe>0?'+':''}${fmt(t.importe)}</div>
+      <button class="edit-btn" onclick="event.stopPropagation();openComunEdit('${editKey}',${origIdx})">✎</button>
+    </div>`;
+  }).join('');
+
+  // ── Donut chart ──
+  const top6 = catSorted.slice(0,6);
+  const donutCtx = document.getElementById('comunDonut')?.getContext('2d');
+  if(donutCtx) {
+    if(window._comunDonutInst) window._comunDonutInst.destroy();
+    window._comunDonutInst = new Chart(donutCtx,{type:'doughnut',data:{
+      labels:top6.map(c=>c.cat),
+      datasets:[{data:top6.map(c=>c.total),backgroundColor:top6.map(c=>c.color),borderWidth:0,hoverOffset:4}]
+    },options:{responsive:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#ffffff',callbacks:{label:ctx=>` ${fmt(ctx.raw)}`}}},cutout:'72%'}});
+  }
+
+  // ── Persona split ──
+  const jose1014   = enrichedComun.filter(t=>t.importe<0 && t.concepto.toUpperCase().includes('1014') && !t._excl);
+  const noelia6012 = enrichedComun.filter(t=>t.importe<0 && t.concepto.toUpperCase().includes('6012') && !t._excl);
+  const joseSpend   = jose1014.reduce((s,t)=>s+Math.abs(t.importe),0);
+  const noeliaSpend = noelia6012.reduce((s,t)=>s+Math.abs(t.importe),0);
+  const joseEl = document.getElementById('comunJoseTotal');
+  const noeliaEl = document.getElementById('comunNoeliaTotal');
+  if(joseEl)   joseEl.textContent   = fmt(joseSpend);
+  if(noeliaEl) noeliaEl.textContent = fmt(noeliaSpend);
+  const noeliaSubCats = {};
+  noelia6012.forEach(t=>{const c=t._cat.cat;if(!noeliaSubCats[c])noeliaSubCats[c]=0;noeliaSubCats[c]+=Math.abs(t.importe);});
+  const joseSubCats = {};
+  jose1014.forEach(t=>{const c=t._cat.cat;if(!joseSubCats[c])joseSubCats[c]=0;joseSubCats[c]+=Math.abs(t.importe);});
+  const noeliaEl2 = document.getElementById('comunNoeliaTotal2');
+  if(noeliaEl2) noeliaEl2.innerHTML = Object.entries(noeliaSubCats).sort((a,b)=>b[1]-a[1]).slice(0,6)
+    .map(([c,v])=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${c}</span><span style="font-family:'DM Mono',monospace;color:var(--purple)">${fmt(v)}</span></div>`).join('');
+  const joseBarsEl = document.getElementById('comunJoseBars');
+  if(joseBarsEl) joseBarsEl.innerHTML = Object.entries(joseSubCats).sort((a,b)=>b[1]-a[1]).slice(0,6)
+    .map(([c,v])=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${c}</span><span style="font-family:'DM Mono',monospace;color:var(--blue)">${fmt(v)}</span></div>`).join('');
+
+  // ── Update tabs ──
+  renderComunMonthTabs();
+
+  // Alerts
+  const alerts=[];
+  // Patinete pendiente de baja
+  alerts.push({t:'warn',i:'!',tl:'Patinete Xiaomi — pendiente cancelar (6,34€/mes)',tx:'Seguro incluido en Mapfre que ya no se usa. Cancela en cuanto puedas darlo de baja.'});
+  if(contractsTotal>0&&totalIncome>0){const pct=contractsTotal/totalIncome*100;if(pct>40)alerts.push({t:'danger',i:'⚠',tl:`Contratos fijos: ${pct.toFixed(0)}% de los ingresos`,tx:'Los pagos fijos consumen más del 40% de lo que entra. Revisa si hay algo que optimizar.'});else if(pct>30)alerts.push({t:'warn',i:'!',tl:`Contratos fijos: ${pct.toFixed(0)}% de los ingresos`,tx:'Zona de atención. Lo recomendable es no superar el 35%.'});}
+  if(savingsPct>=15)alerts.push({t:'good',i:'✓',tl:`Ahorro conjunto: ${savingsPct.toFixed(1)}%`,tx:'La cuenta común genera ahorro. Bien gestionada.'});
+  else if(savingsPct<5)alerts.push({t:'warn',i:'!',tl:`Ahorro bajo en cuenta común: ${savingsPct.toFixed(1)}%`,tx:'Casi todo lo que entra sale. Revisa gastos variables.'});
+  const noContractAmounts=contracts.filter(c=>c.amount===0);
+  if(noContractAmounts.length)alerts.push({t:'info',i:'ℹ',tl:`${noContractAmounts.length} contrato${noContractAmounts.length>1?'s':''} sin importe configurado`,tx:'Entra en "Contratos y pagos fijos" y añade el importe de '+noContractAmounts.map(c=>c.name).join(', ')+'.'});
+  const pendingNoelia = Object.values(comunEdits).filter(e=>e.askNoelia).length;
+  if(pendingNoelia) alerts.push({t:'warn',i:'❓',tl:`${pendingNoelia} movimiento${pendingNoelia>1?'s':''} pendiente${pendingNoelia>1?'s':''} de preguntar a Noelia`,tx:'Búscalos en la lista — tienen el badge amarillo ❓'});
+  document.getElementById('comunAlerts').innerHTML=alerts.slice(0,5).map(a=>`<div class="alert-item ${a.t}"><div class="alert-icon">${a.i}</div><div class="alert-text"><strong>${a.tl}</strong>${a.tx}</div></div>`).join('');
+}
+
+// ── CONTRACTS UI ──
+function renderContracts() {
+  loadContracts();
+  const grid = document.getElementById('contractsGrid');
+  const total = contracts.reduce((s,c)=>s+c.amount,0);
+
+  grid.innerHTML = contracts.map(c=>{
+    const cfg = CONTRACT_CAT_CONFIG[c.cat] || CONTRACT_CAT_CONFIG.otro;
+    return `<div class="contract-item" onclick="openContractModal('${c.id}')">
+      <div class="contract-icon" style="background:${cfg.bg};color:${cfg.color}">${cfg.icon}</div>
+      <div class="contract-info">
+        <div class="contract-name">${c.name}${c.status==="dar_de_baja"?" ⚠️":c.status==="dado_de_baja"?" ❌":""}</div>
+        <div class="contract-amount">${c.amount>0?fmt(c.amount)+'/mes':'Sin importe'}</div>
+        ${c.provider?`<div class="contract-cat" style="background:${cfg.bg};color:${cfg.color}">${c.provider}</div>`:''}
+      </div>
+      <span class="contract-edit">✎</span>
+    </div>`;
+  }).join('') + `<div class="contract-add" onclick="openContractModal(null)"><span>+</span> Añadir contrato</div>`;
+
+  document.getElementById('contractsTotal').textContent = fmt(total);
+  document.getElementById('ckContracts').textContent = fmt(total);
+  document.getElementById('ckContractsSub').textContent = contracts.length+' contratos configurados';
+}
+
+function openContractModal(id) {
+  editingContractId = id;
+  const isNew = !id;
+  document.getElementById('contractModalTitle').textContent = isNew ? 'Nuevo contrato fijo' : 'Editar contrato';
+  document.getElementById('contractDeleteBtn').style.display = isNew ? 'none' : 'block';
+  if (id) {
+    const c = contracts.find(x=>x.id===id);
+    if (!c) return;
+    document.getElementById('contractName').value = c.name;
+    if(document.getElementById('contractStatus')) document.getElementById('contractStatus').value = c.status||'en_uso';
+    document.getElementById('contractCat').value = c.cat;
+    document.getElementById('contractAmount').value = c.amount || '';
+    document.getElementById('contractProvider').value = c.provider || '';
+    document.getElementById('contractKeyword').value = c.keyword || '';
+    document.getElementById('contractNote').value = c.note || '';
+  } else {
+    document.getElementById('contractName').value = '';
+    document.getElementById('contractCat').value = 'seguro';
+    document.getElementById('contractAmount').value = '';
+    document.getElementById('contractProvider').value = '';
+    document.getElementById('contractKeyword').value = '';
+    document.getElementById('contractNote').value = '';
+  }
+  document.getElementById('contractModalOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('contractName').focus(),100);
+}
+function closeContractModal() {
+  document.getElementById('contractModalOverlay').classList.remove('open');
+  editingContractId = null;
+}
+function saveContract() {
+  const c = {
+    name:     document.getElementById('contractName').value.trim() || 'Sin nombre',
+    cat:      document.getElementById('contractCat').value,
+    amount:   parseFloat(document.getElementById('contractAmount').value)||0,
+    provider: document.getElementById('contractProvider').value.trim(),
+    keyword:  document.getElementById('contractKeyword').value.trim().toUpperCase(),
+    note:     document.getElementById('contractNote').value.trim(),
+  };
+  loadContracts();
+  if (editingContractId) {
+    const idx = contracts.findIndex(x=>x.id===editingContractId);
+    if(idx>=0) contracts[idx]={...contracts[idx],...c};
+  } else {
+    contracts.push({...c, id: Date.now().toString()});
+  }
+  saveContracts();
+  closeContractModal();
+  renderContracts();
+  if(comunCurrentMonth&&comunCurrentMonth!=='__comun__') renderComunMonth(comunCurrentMonth);
+}
+function deleteContract() {
+  if(!editingContractId) return;
+  if(!confirm('¿Eliminar este contrato?')) return;
+  contracts = contracts.filter(c=>c.id!==editingContractId);
+  saveContracts();
+  closeContractModal();
+  renderContracts();
+}
+document.getElementById('contractModalOverlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('contractModalOverlay')) closeContractModal();
+});
+// ══ END CUENTA COMÚN ══════════════════════════════════════════════════════════
+
+
+function showComunFromHome() {
+  hideHome();
+  showComun();
+}
+
+// Add ← Inicio button to comun header — inject dynamically
+document.addEventListener('DOMContentLoaded', () => {
+  // Wire comun file input and add back btn to comun header bar
+  const headerBar = document.querySelector('#comunSection .comun-header-bar');
+  if (headerBar) {
+    const backBtn = document.createElement('button');
+    backBtn.className = 'btn-sm';
+    backBtn.textContent = '← Inicio';
+    backBtn.style.marginRight = 'auto';
+    backBtn.onclick = () => { hideComun(); showHome(); };
+    headerBar.insertBefore(backBtn, headerBar.firstChild);
+  }
+});
+
+
+// ── DEMO CUENTA COMÚN ────────────────────────────────────────────────────────
+function loadComunDemo() {
+  const txns = [
+    {fecha:"30/01/2026",concepto:"NOMINA ARCELORMITTAL TAILORED BLANKS ZARAGOZA S",importe:2984.27,saldo:4157.99},
+    {fecha:"30/01/2026",concepto:"TARJETA CREDITO JOSE ANTONIO GOMEZ CABANILLAS",importe:-90.0,saldo:1173.72},
+    {fecha:"30/01/2026",concepto:"PRESTAMOS ADEUDO CUOTA N.8075481627 31/01/26",importe:-802.02,saldo:1263.72},
+    {fecha:"30/01/2026",concepto:"TELEFONOS ORANGE ESPAGNE SAU ORANGE MOVIL 0126",importe:-132.06,saldo:2065.74},
+    {fecha:"29/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 23.01 AUT. VASCO ARAGONESA AP68-ALAGON",importe:-6.15,saldo:2197.8},
+    {fecha:"29/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 MERCADONA MIRALBUENO-ZARAGOZA",importe:-331.54,saldo:2203.95},
+    {fecha:"28/01/2026",concepto:"NOMINA FUNDACION SAN VALERO",importe:2403.77,saldo:2535.49},
+    {fecha:"28/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 SP OMARA-POZUELO DE AL",importe:-82.9,saldo:131.72},
+    {fecha:"28/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-1.3,saldo:214.62},
+    {fecha:"28/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 CHARCUTERIA ANA P.MARTINE-ZARAGOZA",importe:-15.25,saldo:215.92},
+    {fecha:"27/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 LOS FRUTALES-ZARAGOZA",importe:-56.52,saldo:231.17},
+    {fecha:"27/01/2026",concepto:"TRASPASO 1912-00013020-38 6AVEO2Z3R5NZJBQ37",importe:250.0,saldo:287.69},
+    {fecha:"27/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DIA MALLEN ZARAGOZA-ZARAGOZA",importe:-3.45,saldo:37.69},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 23.01 AUT. VASCO ARAGONESA AP68-ALAGON",importe:-6.15,saldo:41.14},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-4.3,saldo:47.29},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-4.65,saldo:51.59},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 CAFETERIA CAMPOS DE FAF-ZARAGOZA",importe:-4.2,saldo:56.24},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 TELEPIZZA MIRALBUENO-ZARAGOZA",importe:-45.8,saldo:60.44},
+    {fecha:"26/01/2026",concepto:"TRASPASO 1912-00013020-38 MKT37JAMWUOM64UNZ",importe:100.0,saldo:106.24},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 PANADERIA TORRES-ZARAGOZA",importe:-6.37,saldo:6.24},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 PANADERIA TORRES-ZARAGOZA",importe:-4.7,saldo:12.61},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 ZARA-ZARAGOZA",importe:-5.98,saldo:17.31},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 ARENAL PUERTO VENECIA 518-ZARAGOZA",importe:-5.97,saldo:23.29},
+    {fecha:"26/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DRUNI S.A CC PUERTO VENEC-ZARAGOZA",importe:-5.93,saldo:29.26},
+    {fecha:"23/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 MARIA SAL DEL RIO ARGANZA-MAGALLON",importe:-9.98,saldo:35.19},
+    {fecha:"23/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 CORP ALIM GUISSONA T494-PICO COTIELLA",importe:-12.92,saldo:45.17},
+    {fecha:"23/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP LAGOS DE CORONAS-ZARAGOZA",importe:-4.0,saldo:58.09},
+    {fecha:"23/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 CLAREL-ZARAGOZA",importe:-14.83,saldo:62.09},
+    {fecha:"23/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 FARMACIA MARCIAL ALVAREZ-ZARAGOZA",importe:-15.7,saldo:76.92},
+    {fecha:"22/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DIA MALLEN ZARAGOZA-ZARAGOZA",importe:-3.94,saldo:92.62},
+    {fecha:"22/01/2026",concepto:"ADEUDO RECIBO MAPFRE",importe:-54.9,saldo:96.56},
+    {fecha:"22/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 ALCAMPO ZARAGOZA-ZARAGOZA",importe:-9.03,saldo:151.46},
+    {fecha:"21/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 FARMACIA SERRANO BASALDUA-ZARAGOZA",importe:-2.95,saldo:160.49},
+    {fecha:"21/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 GILCA-ZARAGOZA",importe:-1.1,saldo:163.44},
+    {fecha:"21/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 FARMACIA SERRANO BASALDUA-ZARAGOZA",importe:-39.5,saldo:164.54},
+    {fecha:"21/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-2.5,saldo:204.04},
+    {fecha:"20/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-4.65,saldo:206.54},
+    {fecha:"20/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 DREAMFIT-ZARAGOZA",importe:-17.3,saldo:211.19},
+    {fecha:"20/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-4.15,saldo:228.49},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EXPLAGOSAL-ZARAGOZA",importe:-6.57,saldo:232.64},
+    {fecha:"19/01/2026",concepto:"PAGO BIZUM CARMEN H S",importe:-2.5,saldo:239.21},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 LOS FRUTALES-ZARAGOZA",importe:-43.26,saldo:241.71},
+    {fecha:"19/01/2026",concepto:"TRASPASO 1912-00013020-38 FTBGJL2YPLAWLGEEF",importe:250.0,saldo:284.97},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EXPLAGOSAL-ZARAGOZA",importe:-16.43,saldo:34.97},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 Glovo 17JAN ZHPSAEPG-glovoapp.com",importe:-42.94,saldo:51.4},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 PANADERIA TORRES-ZARAGOZA",importe:-6.8,saldo:94.34},
+    {fecha:"19/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 MAS CLARAS-ZARAGOZA",importe:-22.5,saldo:101.14},
+    {fecha:"16/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 14.01 Dyson Spain SLU-Madrid",importe:-125.0,saldo:123.64},
+    {fecha:"15/01/2026",concepto:"GAS Naturgy Clientes, S.A.U.",importe:-83.04,saldo:248.64},
+    {fecha:"15/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DIA MALLEN ZARAGOZA-ZARAGOZA",importe:-3.06,saldo:331.68},
+    {fecha:"15/01/2026",concepto:"TRASPASO 1912-00013020-38 3EZFRW6IYEXZDGQE6",importe:258.0,saldo:334.74},
+    {fecha:"14/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 NUOVA ISRAEL MARTIN-ZARAGOZA",importe:-16.0,saldo:76.74},
+    {fecha:"14/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-3.1,saldo:92.74},
+    {fecha:"13/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DIA MALLEN ZARAGOZA-ZARAGOZA",importe:-2.28,saldo:95.84},
+    {fecha:"13/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 MERCADONA MIRALBUENO-ZARAGOZA",importe:-83.89,saldo:98.12},
+    {fecha:"13/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-11.3,saldo:182.01},
+    {fecha:"13/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EXPLAGOSAL-ZARAGOZA",importe:-10.08,saldo:193.31},
+    {fecha:"12/01/2026",concepto:"PAGO BIZUM RAQUEL R C",importe:-3.0,saldo:203.39},
+    {fecha:"12/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 ES MIRALBUENO-ZARAGOZA",importe:-64.16,saldo:206.39},
+    {fecha:"12/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EBOCA VENDING-CUARTE HUESC",importe:-1.2,saldo:270.55},
+    {fecha:"12/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 Just Eat Spain, S.L.-MADRID",importe:-7.38,saldo:271.75},
+    {fecha:"12/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 FARMACIA MARCIAL ALVAREZ-ZARAGOZA",importe:-15.2,saldo:279.13},
+    {fecha:"12/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 PANADERIA TORRES-ZARAGOZA",importe:-8.5,saldo:294.33},
+    {fecha:"08/01/2026",concepto:"NOMINA FUNDACION SAN VALERO",importe:4.52,saldo:302.83},
+    {fecha:"08/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DIA MALLEN ZARAGOZA-ZARAGOZA",importe:-5.33,saldo:298.31},
+    {fecha:"08/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 MERCADONA MIRALBUENO-ZARAGOZA",importe:-62.82,saldo:303.64},
+    {fecha:"08/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 LOS FRUTALES-ZARAGOZA",importe:-39.35,saldo:366.46},
+    {fecha:"07/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-1.3,saldo:405.81},
+    {fecha:"07/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP SALVADOR ALLENDE-ZARAGOZA",importe:-3.1,saldo:407.11},
+    {fecha:"07/01/2026",concepto:"ABONO TRANSFERENCIA DE Mangopay",importe:10.0,saldo:410.21},
+    {fecha:"06/01/2026",concepto:"ADEUDO RECIBO MAPFRE",importe:-240.04,saldo:400.21},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 GOTTA LOS ENLACES-ENLACES",importe:-102.92,saldo:640.25},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 SUPERCOR LA FLORESTA-ZARAGOZA",importe:-35.5,saldo:743.17},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 E S ALCAMPO LOS ENLACES-ZARAGOZA",importe:-61.01,saldo:778.67},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 MM ZARAGOZA PUERTO VENECI-ZARAGOZA",importe:-289.0,saldo:839.68},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EL CORTE INGLES ZARAGOZA-ZARAGOZA",importe:-359.15,saldo:865.04},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANDORA PUERTO VENECIA-ZARAGOZA",importe:-39.0,saldo:1487.83},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EL CORTE INGLES C.C. PUER-ZARAGOZA",importe:-42.99,saldo:1526.83},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 TAGLIATELLA-PUERTO VENECI-ZARAGOZA",importe:-82.0,saldo:1569.82},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 EL CORTE INGLES C.C. PUER-ZARAGOZA",importe:-39.9,saldo:1651.82},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 McDonalds 72400156-ZARAGOZA",importe:-24.77,saldo:1691.72},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 INDIGO SALAMERO-ZARAGOZA",importe:-25.0,saldo:1716.49},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 EL CORTE INGLES ZARAGOZA-ZARAGOZA",importe:-137.4,saldo:1741.49},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 EL CORTE INGLES ZARAGOZA-ZARAGOZA",importe:-20.3,saldo:1878.89},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 EL CORTE INGLES ZARAGOZA-ZARAGOZA",importe:-79.0,saldo:1899.19},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PRIMOR-ZARAGOZA",importe:-49.3,saldo:1978.19},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 DRUNI S.A-ZARAGOZA",importe:-55.15,saldo:2027.49},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 VALOR ZARAGOZA-RIO ARAGON",importe:-4.75,saldo:2082.64},
+    {fecha:"05/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX1014 VALOR ZARAGOZA-RIO ARAGON",importe:-12.1,saldo:2087.39},
+    {fecha:"02/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 PANISHOP LAGOS DE CORONAS-ZARAGOZA",importe:-2.45,saldo:2099.49},
+    {fecha:"02/01/2026",concepto:"COMPRA TARJ. 5402XXXXXXXX6012 COOP. SANTO CRISTO-MAGALLON",importe:-98.39,saldo:2101.94},
+    {fecha:"02/01/2026",concepto:"ADEUDO RECIBO C.P. PARQUE DE LOS TILOS",importe:-120.85,saldo:2200.33},
+    {fecha:"02/01/2026",concepto:"ADEUDO RECIBO FORUS SIGLO XXI",importe:-39.16,saldo:2321.18}
+  ];
+  // Only load if no data saved yet — never overwrite existing edits
+  const existing = JSON.parse(localStorage.getItem('finanzas_comun_months')||'{}');
+  if (Object.keys(existing).length === 0) {
+    comunMonths = {'Ene 2026': {txns, titular:'JOSE ANTONIO*GOMEZ CABANILLAS Y NOELIA*MORALES MAGALLON'}};
+    saveComunMonths();
+  } else {
+    comunMonths = existing;
+  }
+  renderComunMonthTabs();
+  document.getElementById('comunUploadHint').style.display='none';
+  document.getElementById('comunTxnScroll').style.display='block';
+  const keys = getComunMonthKeys();
+  renderComunMonth(keys[keys.length-1]);
+}
+
+
+// ── BACKUP: EXPORTAR / IMPORTAR ──────────────────────────────────────────────
+function getAllData() {
+  const keys = [
+    'finanzas_months_jose','finanzas_edits_jose','finanzas_patrimonio_jose',
+    'finanzas_pat_history_jose','finanzas_objetivos_jose','finanzas_notifs_jose',
+    'finanzas_crypto_prices','finanzas_contracts_jose',
+    'finanzas_comun_months','finanzas_comun_edits',
+    'finanzas_pisos_jose','finanzas_pisos_meses','finanzas_pisos_asignar','finanzas_bloc_personal','finanzas_bloc_comun','finanzas_bloc_pisos'
+  ];
+  const data = { v:4, ts: new Date().toISOString() };
+  keys.forEach(k=>{ try{ const v=localStorage.getItem(k); if(v) data[k]=v; }catch(e){} });
+  return data;
+}
+
+function setAllData(data) {
+  const skip = ['v','ts'];
+  Object.entries(data).forEach(([k,v])=>{
+    if(skip.includes(k)) return;
+    try{ localStorage.setItem(k,v); }catch(e){}
+  });
+}
+
+function exportarTodo() {
+  const data = getAllData();
+  const fecha = new Date().toISOString().slice(0,10);
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'finanzas-backup-' + fecha + '.json';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=> URL.revokeObjectURL(url), 1000);
+  setBackupMsg('ok', '✓ Exportado: finanzas-backup-' + fecha + '.json');
+}
+
+function importarTodo(input) {
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if(!data.v) throw new Error('Archivo no válido');
+      setAllData(data);
+      // Reload all modules
+      allMonths = {};
+      const saved = loadSavedMonths();
+      if(Object.keys(saved).length) { allMonths = saved; rebuildMonthTabs(); }
+      loadComunMonths();
+      loadContracts();
+      loadSummary();
+      const ts = data.ts ? new Date(data.ts).toLocaleString('es-ES') : '?';
+      setBackupMsg('ok', '✓ Datos cargados correctamente — backup del ' + ts);
+    } catch(err) {
+      setBackupMsg('err', '✗ Error al importar: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+function setBackupMsg(type, msg) {
+  const el = document.getElementById('backupMsg');
+  if(!el) return;
+  el.style.display = 'block';
+  el.style.color = type === 'ok' ? 'var(--green)' : 'var(--red)';
+  el.textContent = msg;
+  if(type === 'ok') setTimeout(()=>{ el.style.display='none'; }, 5000);
+}
+// ── END BACKUP ────────────────────────────────────────────────────────────────
+
+
+// ══ INMUEBLES ════════════════════════════════════════════════════════════════
+const LS_PISOS = 'finanzas_pisos_jose';
+let pisosData = {};
+let currentPiso = 'noticiero';
+let currentPisosYear = new Date().getFullYear().toString();
+
+const PISOS_DEF = {
+  lagos: {
+    name: 'C/ Lagos de Millares 22 — Vivienda habitual',
+    icon: '🏡', color: '#e0704a',
+    titularidad: '100% José + Noelia',
+    estado: 'habitual',
+    hipoteca: { cuota: 802, pendiente: 240000, tae: 1.1 },
+    habitaciones: [],
+    driveUrl: '',
+    esViviendaHabitual: true,
+    gastosFijos: [
+      { cat:'ibi',    nombre:'IBI Lagos Vivienda+Garaje 1 (3x/año)', importe:233.97, frecuencia:'cuatrimestral' },
+      { cat:'ibi',    nombre:'IBI Lagos Trastero (3x/año)', importe:28, frecuencia:'cuatrimestral' },
+      { cat:'ibi',    nombre:'IBI Lagos Garaje 2 (3x/año)', importe:20, frecuencia:'cuatrimestral' },
+      { cat:'seguro', nombre:'Seguro hogar Mapfre (Lagos)', importe:23.52 },
+      { cat:'seguro', nombre:'Seguro vida José (Mapfre)', importe:20.53 },
+      { cat:'seguro', nombre:'Seguro vida Noelia (Mapfre)', importe:16.56 },
+    ]
+  },
+  noticiero: {
+    name: 'C/ El Noticiero 2, 1ºA',
+    icon: '🏠', color: '#4caf7d',
+    titularidad: '50% José + 50% Iker',
+    estado: 'alquilado',
+    hipoteca: { cuota: 290, pendiente: 83000, tae: 1.42 },
+    habitaciones: [{ id:'h1', nombre:'Piso completo', inquilino:'', alquiler:710 }],
+    driveUrl: '',
+    gastosFijos: [
+      { cat:'comunidad', nombre:'Comunidad propietarios', importe:85 },
+      { cat:'hipoteca',  nombre:'Hipoteca El Noticiero',  importe:290 },
+      { cat:'ibi',       nombre:'IBI El Noticiero (2 veces/año)', importe:122.95, frecuencia:'semestral' },
+      { cat:'seguro',    nombre:'Seguro hogar Mapfre (Noticiero)', importe:17.81 },
+    ]
+  },
+  ayuso: {
+    name: 'Avd. Manuel Rodríguez Ayuso',
+    icon: '🏠', color: '#5c9be0',
+    titularidad: '50% José + 50% Noelia',
+    estado: 'alquilado',
+    hipoteca: null,
+    habitaciones: [{ id:'h1', nombre:'Piso completo', inquilino:'', alquiler:610 }],
+    driveUrl: '',
+    gastosFijos: [
+      { cat:'comunidad', nombre:'Comunidad propietarios', importe:32.48 },
+      { cat:'ibi',       nombre:'IBI Avd. Ayuso (2 veces/año)', importe:34.14, frecuencia:'semestral' },
+    ]
+  },
+  navarra: {
+    name: 'Avd. Navarra 77, 2ºIzda',
+    icon: '🏠', color: '#9b7dd4',
+    titularidad: '50% José + 50% Noelia',
+    estado: 'alquilado',
+    hipoteca: null,
+    habitaciones: [
+      { id:'h1', nombre:'Habitación 1', inquilino:'', alquiler:300 },
+      { id:'h2', nombre:'Habitación 2 (Aimane)', inquilino:'Aimane', alquiler:300 },
+      { id:'h3', nombre:'Habitación 3 (Roger)', inquilino:'Roger', alquiler:300 },
+      { id:'h4', nombre:'Habitación 4 (Charlote)', inquilino:'Charlote', alquiler:290 },
+    ],
+    driveUrl: '',
+    gastosFijos: [
+      { cat:'comunidad', nombre:'Comunidad propietarios',  importe:102.10 },
+      { cat:'luz',       nombre:'Luz',                     importe:130 },
+      { cat:'telefono',  nombre:'Teléfono/Internet',        importe:44.90 },
+      { cat:'hipoteca',  nombre:'Hipoteca El Noticiero (rehipotecado)', importe:290 },
+      { cat:'gestion',   nombre:'Gestión Grupo Naera',      importe:145.20 },
+      { cat:'ibi',       nombre:'IBI Avd. Navarra (2 veces/año)', importe:88.10, frecuencia:'semestral' },
+      { cat:'seguro',    nombre:'Seguro hogar Santalucía (anual 200,16€)', importe:16.68 },
+    ]
+  },
+  balada: {
+    name: 'Ada. Francisco José Balada 112',
+    icon: '🏠', color: '#c9a84c',
+    titularidad: '50% José + 50% Noelia',
+    estado: 'vacio',
+    hipoteca: { cuota: 377.74, pendiente: 59985.74, tae: 3.3 },
+    habitaciones: [],
+    driveUrl: '',
+    gastosFijos: [
+      { cat:'comunidad', nombre:'Comunidad propietarios', importe:118.29, frecuencia:'trimestral' },
+      { cat:'luz',       nombre:'Luz',                    importe:25 },
+      { cat:'hipoteca',  nombre:'Hipoteca Eurocajarural', importe:377.74 },
+      { cat:'ibi',       nombre:'IBI Apartamento Balada (anual)', importe:337.60, frecuencia:'anual' },
+    ]
+  }
+};
+
+const MOV_CAT_CONFIG = {
+  alquiler:   { icon:'🏠', color:'#4caf7d' },
+  comunidad:  { icon:'🏢', color:'#5c9be0' },
+  ibi:        { icon:'📋', color:'#e0a05c' },
+  hipoteca:   { icon:'🏦', color:'#c9a84c' },
+  seguro:     { icon:'🛡', color:'#e05c5c' },
+  luz:        { icon:'⚡', color:'#e0b45c' },
+  agua:       { icon:'💧', color:'#5cb8e0' },
+  telefono:   { icon:'📱', color:'#4cc9c0' },
+  gestion:    { icon:'👔', color:'#9b7dd4' },
+  reparacion: { icon:'🔧', color:'#e07c5c' },
+  otros:      { icon:'📦', color:'#666' },
+  transferencia: { icon:'↔', color:'#888' },
+  provision: { icon:'🏦', color:'#7c5cc4' },
+};
+
+function loadPisos() {
+  try { pisosData = JSON.parse(localStorage.getItem(LS_PISOS)||'{}'); } catch { pisosData = {}; }
+}
+function savePisos() {
+  try { localStorage.setItem(LS_PISOS, JSON.stringify(pisosData)); } catch(e){} 
+}
+let currentPisosMonth = ''; // '' = año completo
+
+function getPisoMovs(pisoId, year, month) {
+  const m2 = month || currentPisosMonth;
+  return (pisosData[pisoId]||[]).filter(m => {
+    if(!m.fecha) return false;
+    if(m2) return m.fecha.startsWith(year+'-'+m2);
+    return m.fecha.startsWith(year);
+  });
+}
+
+// ── NAVIGATION ──
+function showPisos() {
+  document.getElementById('homeScreen').style.display='none';
+  document.getElementById('upload-screen').style.display='none';
+  document.getElementById('app').style.display='none';
+  document.getElementById('patrimonioSection').style.display='none';
+  document.getElementById('objetivosSection').style.display='none';
+  document.getElementById('comunSection').style.display='none';
+  document.getElementById('pisosSection').style.display='block';
+  currentMonth = '__pisos__';
+  loadPisos();
+  renderPisosMonthNav();
+  renderPisosResumen();
+  showPiso('noticiero', document.querySelector('.piso-tab'));
+}
+function hidePisos() { document.getElementById('pisosSection').style.display='none'; }
+
+function initPisosYearSel() {
+  const sel = document.getElementById('pisosYearSel');
+  const years = ['2024','2025','2026'];
+  sel.innerHTML = years.map(y=>`<option value="${y}" ${y===currentPisosYear?'selected':''}>${y}</option>`).join('');
+}
+
+function renderPisosMonthNav() {
+  const MES_NAMES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const years = ['2024','2025','2026'];
+  const months = ['','01','02','03','04','05','06','07','08','09','10','11','12'];
+  let html = '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">';
+  // Year selector
+  years.forEach(y=>{
+    const active = y===currentPisosYear && !currentPisosMonth;
+    // Don't show "year total" button if month is selected - handled separately
+    html += '<button class="month-nav-btn'+(y===currentPisosYear?' active':'')+'" onclick="setPisosYear(this.dataset.y)" data-y="'+y+'" style="font-weight:600">'+y+'</button>';
+  });
+  html += '<span style="color:var(--border2);margin:0 4px">|</span>';
+  // Month buttons
+  html += '<button class="month-nav-btn'+(!currentPisosMonth?' active':'')+'" onclick="setPisosMonth(\"\")">Todo el año</button>';
+  MES_NAMES.forEach((m,i)=>{
+    const mm = String(i+1).padStart(2,'0');
+    html += '<button class="month-nav-btn'+(currentPisosMonth===mm?' active':'')+'" onclick="setPisosMonth(this.dataset.mm)" data-mm="'+mm+'">'+m+'</button>';
+  });
+  html += '</div>';
+  document.getElementById('pisosMonthNav').innerHTML = html;
+}
+
+function setPisosYear(el) {
+  const year = el.dataset ? el.dataset.y : el;
+  currentPisosYear = year;
+  currentPisosMonth = '';
+  renderPisosMonthNav();
+  renderPisosResumen();
+  const safeP = PISOS_DEF[currentPiso] ? currentPiso : (currentPiso==='asignar'||currentPiso==='todos') ? currentPiso : 'noticiero';
+  showPiso(safeP);
+}
+function setPisosMonth(el) {
+  const month = (typeof el === "string") ? el : (el.dataset ? el.dataset.mm : "");
+  currentPisosMonth = month;
+  renderPisosMonthNav();
+  renderPisosResumen();
+  const safeP = PISOS_DEF[currentPiso] ? currentPiso : (currentPiso==='asignar'||currentPiso==='todos') ? currentPiso : 'noticiero';
+  showPiso(safeP);
+}
+
+function renderPisosYear(year) {
+  currentPisosYear = year;
+  currentPisosMonth = '';
+  renderPisosMonthNav();
+  renderPisosResumen();
+  showPiso(currentPiso);
+}
+
+function showPiso(pisoId, tabEl) {
+  currentPiso = pisoId;
+  document.querySelectorAll('.piso-tab').forEach(t=>t.classList.remove('active'));
+  if(tabEl) tabEl.classList.add('active');
+  if(pisoId === 'asignar') { loadPisosAsignar(); renderAsignarPanel(); return; }
+  if(pisoId === 'todos')   { renderResumenGestor(); return; }
+  // Guard: if pisoId not in PISOS_DEF, default to noticiero
+  if(!PISOS_DEF[pisoId]) { pisoId = 'noticiero'; currentPiso = pisoId; }
+  renderPisoPanel(pisoId);
+}
+
+function renderPisosResumen() {
+  const kpis = document.getElementById('pisosResumenKpis');
+  let totalIngresos=0, totalGastos=0;
+  Object.keys(PISOS_DEF).filter(pid=>pid!=='lagos').forEach(pid=>{
+    const movs = getPisoMovs(pid, currentPisosYear);
+    totalIngresos += movs.filter(m=>m.tipo==='ingreso').reduce((s,m)=>s+m.importe,0);
+    totalGastos   += movs.filter(m=>m.tipo==='gasto').reduce((s,m)=>s+m.importe,0);
+  });
+  // Include lagos gastos but not as rental income
+  const lagosMovs = getPisoMovs('lagos', currentPisosYear);
+  totalGastos += lagosMovs.filter(m=>m.tipo==='gasto').reduce((s,m)=>s+m.importe,0);
+  const neto = totalIngresos - totalGastos;
+  kpis.innerHTML = `
+    <div class="piso-kpi"><div class="piso-kpi-label">Ingresos ${currentPisosYear}</div><div class="piso-kpi-value" style="color:var(--green)">${fmt(totalIngresos)}</div></div>
+    <div class="piso-kpi"><div class="piso-kpi-label">Gastos ${currentPisosYear}</div><div class="piso-kpi-value" style="color:var(--red)">${fmt(totalGastos)}</div></div>
+    <div class="piso-kpi"><div class="piso-kpi-label">Rendimiento neto</div><div class="piso-kpi-value" style="color:${neto>=0?'var(--gold)':'var(--red)'}">${fmt(neto)}</div></div>
+    <div class="piso-kpi"><div class="piso-kpi-label">Rentabilidad</div><div class="piso-kpi-value" style="color:var(--teal)">${totalIngresos>0?(neto/totalIngresos*100).toFixed(1)+'%':'—'}</div></div>
+  `;
+}
+
+function renderPisoPanel(pisoId) {
+  if(!PISOS_DEF[pisoId]) { console.warn('renderPisoPanel: pisoId no valido:', pisoId); return; }
+  const def = PISOS_DEF[pisoId];
+  const movs = getPisoMovs(pisoId, currentPisosYear, currentPisosMonth);
+  const ingresos = movs.filter(m=>m.tipo==='ingreso');
+  const gastos   = movs.filter(m=>m.tipo==='gasto');
+  const totalI = ingresos.reduce((s,m)=>s+m.importe,0);
+  const totalG = gastos.reduce((s,m)=>s+m.importe,0);
+  const neto = totalI - totalG;
+  const alqEsperado = def.habitaciones.reduce((s,h)=>s+h.alquiler,0) * 12;
+  const gastoCats = {};
+  gastos.forEach(m=>{ if(!gastoCats[m.cat]) gastoCats[m.cat]=0; gastoCats[m.cat]+=m.importe; });
+  // Tag each mov with its real index in pisosData before filtering/sorting
+  const allPisoMovs = pisosData[pisoId] || [];
+  allPisoMovs.forEach((m,i) => { m.__idx = i; });
+  const allMovs = [...movs].sort((a,b)=>b.fecha.localeCompare(a.fecha));
+
+  // Build HTML with string concat to avoid nested template literal issues
+  let html = '<div class="piso-card">';
+
+  // Header
+  html += '<div class="piso-card-header"><div>';
+  html += '<div class="piso-address">' + def.name + '</div>';
+  html += '<div class="piso-meta"><span>' + def.titularidad + '</span>';
+  html += '<span class="piso-badge ' + def.estado + '">' + (def.estado==='alquilado'?'✓ Alquilado':'⊘ Vacío') + '</span>';
+  if(def.hipoteca) html += '<span class="piso-badge">Hipoteca ' + fmt(def.hipoteca.cuota) + '/mes · ' + fmt(def.hipoteca.pendiente) + ' pendiente</span>';
+  html += '</div></div>';
+  html += '<div style="display:flex;gap:8px;align-items:center">';
+  if(def.driveUrl) html += '<a href="' + def.driveUrl + '" target="_blank" class="piso-drive-link">📁 Drive</a>';
+  else html += '<button class="piso-drive-link" onclick="setPisoDrive(\'' + pisoId + '\')">📁 Añadir enlace Drive</button>';
+  html += '</div></div>';
+
+  // KPIs
+  html += '<div class="piso-kpis">';
+  html += '<div class="piso-kpi"><div class="piso-kpi-label">Ingresos ' + currentPisosYear + '</div><div class="piso-kpi-value" style="color:var(--green)">' + fmt(totalI) + '</div></div>';
+  html += '<div class="piso-kpi"><div class="piso-kpi-label">Gastos ' + currentPisosYear + '</div><div class="piso-kpi-value" style="color:var(--red)">' + fmt(totalG) + '</div></div>';
+  html += '<div class="piso-kpi"><div class="piso-kpi-label">Rendimiento neto</div><div class="piso-kpi-value" style="color:' + (neto>=0?'var(--gold)':'var(--red)') + '">' + fmt(neto) + '</div></div>';
+  html += '<div class="piso-kpi"><div class="piso-kpi-label">' + (def.esViviendaHabitual ? 'Tipo' : 'Alquiler esperado/año') + '</div><div class="piso-kpi-value" style="color:var(--teal)">' + (def.esViviendaHabitual ? 'Vivienda habitual' : fmt(alqEsperado)) + '</div></div>';
+  html += '</div>';
+
+  // Habitaciones
+  if(def.habitaciones.length > 0) {
+    html += '<div style="margin-bottom:1rem">';
+    html += '<div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:500">Habitaciones / Contratos de alquiler</div>';
+    html += '<div class="habitaciones-grid" style="grid-template-columns:repeat(' + Math.min(def.habitaciones.length,4) + ',1fr)">';
+    def.habitaciones.forEach(h=>{
+      html += '<div class="hab-card">';
+      html += '<div class="hab-name">' + h.nombre + '</div>';
+      html += '<div class="hab-amount">' + fmt(h.alquiler) + '/mes</div>';
+      if(h.inquilino) html += '<div class="hab-inquilino">' + h.inquilino + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '<div style="font-size:12px;color:var(--text2);margin-top:6px">Alquiler esperado: <span style="font-family:\'DM Mono\',monospace;color:var(--green)">' + fmt(alqEsperado) + '/año</span></div>';
+    html += '</div>';
+  }
+
+  // Gastos grid
+  html += '<div class="ingresos-gastos-grid">';
+  // Gastos por categoría
+  html += '<div class="card" style="margin:0"><div class="card-header"><span class="card-title">Gastos por categoría</span><span class="card-badge">' + fmt(totalG) + '</span></div>';
+  const catEntries = Object.entries(gastoCats).sort((a,b)=>b[1]-a[1]);
+  if(catEntries.length) {
+    catEntries.forEach(([cat,v])=>{
+      const cfg = MOV_CAT_CONFIG[cat]||MOV_CAT_CONFIG.otros;
+      html += '<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)">';
+      html += '<span style="color:var(--text2)">' + cfg.icon + ' ' + cat + '</span>';
+      html += '<span style="font-family:\'DM Mono\',monospace;color:var(--red)">' + fmt(v) + '</span></div>';
+    });
+  } else {
+    html += '<div style="font-size:12px;color:var(--text3);padding:8px 0">Sin gastos registrados</div>';
+  }
+  html += '</div>';
+  // Gastos fijos referencia
+  html += '<div class="card" style="margin:0"><div class="card-header"><span class="card-title">Gastos fijos de referencia</span></div>';
+  def.gastosFijos.forEach(g=>{
+    const cfg = MOV_CAT_CONFIG[g.cat]||MOV_CAT_CONFIG.otros;
+    html += '<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)">';
+    html += '<span style="color:var(--text2)">' + cfg.icon + ' ' + g.nombre + '</span>';
+    html += '<span style="font-family:\'DM Mono\',monospace;color:var(--text2)">' + fmt(g.importe) + (g.frecuencia?'/'+g.frecuencia:'/mes') + '</span></div>';
+  });
+  html += '</div></div>';
+
+  // Movimientos
+  html += '<div class="movimientos-piso">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+  html += '<span style="font-size:13px;font-weight:500">Movimientos ' + currentPisosYear + '</span>';
+  html += '<button class="btn-sm" onclick="openMovPisoModal(\'' + pisoId + '\',null)">+ Añadir</button></div>';
+  if(allMovs.length) {
+    allMovs.forEach(m=>{
+      const cfg = MOV_CAT_CONFIG[m.cat]||MOV_CAT_CONFIG.otros;
+      const origIdx = m.__idx !== undefined ? m.__idx : pisosData[pisoId].indexOf(m);
+      html += '<div class="mov-piso-item" onclick="openEditMovPiso(\'' + pisoId + '\',' + origIdx + ')" style="cursor:pointer">';
+      html += '<div class="mov-piso-icon" style="background:' + cfg.color + '22;color:' + cfg.color + '">' + cfg.icon + '</div>';
+      html += '<div class="mov-piso-info"><div class="mov-piso-name">' + m.concepto + '</div>';
+      html += '<div class="mov-piso-date">' + m.fecha + ' · ' + m.cat + (m.nota?' · '+m.nota:'') + '</div></div>';
+      html += '<div class="mov-piso-amount ' + (m.tipo==='ingreso'?'pos':'neg') + '">' + (m.tipo==='ingreso'?'+':'−') + fmt(m.importe) + '</div></div>';
+    });
+  } else {
+    html += '<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:13px">Sin movimientos en ' + currentPisosYear + '. Pulsa "+ Añadir" para empezar.</div>';
+  }
+  html += '</div></div>';
+
+  document.getElementById('pisoPanels').innerHTML = html;
+}
+
+function renderResumenGestor() {
+  const year = currentPisosYear;
+  let html = '<div class="piso-card">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">';
+  html += '<div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:700">📊 Resumen para el gestor — ' + year + '</div>';
+  html += '<button class="btn-sm" onclick="exportResumenGestor()">⬇ Exportar CSV</button></div>';
+
+  Object.entries(PISOS_DEF).forEach(([pid, def])=>{
+    const movs = getPisoMovs(pid, year, '');
+    const totalI = movs.filter(m=>m.tipo==='ingreso').reduce((s,m)=>s+m.importe,0);
+    const gastos = movs.filter(m=>m.tipo==='gasto');
+    const totalG = gastos.reduce((s,m)=>s+m.importe,0);
+    const gastoCats = {};
+    gastos.forEach(m=>{ if(!gastoCats[m.cat]) gastoCats[m.cat]=0; gastoCats[m.cat]+=m.importe; });
+
+    html += '<div class="resumen-renta" style="margin-bottom:1rem">';
+    html += '<div class="resumen-renta-title">🏠 ' + def.name + '</div>';
+    html += '<div class="resumen-row"><span>Ingresos brutos alquiler</span><span style="color:var(--green)">' + fmt(totalI) + '</span></div>';
+    Object.entries(gastoCats).forEach(([cat,v])=>{
+      html += '<div class="resumen-row"><span style="color:var(--text2)"> − ' + cat + '</span><span style="color:var(--red)">' + fmt(v) + '</span></div>';
+    });
+    html += '<div class="resumen-row total"><span>Rendimiento neto</span><span>' + fmt(totalI-totalG) + '</span></div>';
+    html += '<div style="font-size:11px;color:var(--text3);margin-top:6px">% propiedad: 50% · Tu parte: ' + fmt((totalI-totalG)*0.5) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  document.getElementById('pisoPanels').innerHTML = html;
+}
+
+function exportResumenGestor() {
+  const year = currentPisosYear;
+  let csv = 'Piso,Concepto,Importe\r\n';
+  Object.entries(PISOS_DEF).forEach(([pid, def])=>{
+    const movs = getPisoMovs(pid, year, '');
+    const ingresos = movs.filter(m=>m.tipo==='ingreso').reduce((s,m)=>s+m.importe,0);
+    csv += '"' + def.name + '","Ingresos brutos",' + ingresos + '\r\n';
+    const gastoCats = {};
+    movs.filter(m=>m.tipo==='gasto').forEach(m=>{ if(!gastoCats[m.cat]) gastoCats[m.cat]=0; gastoCats[m.cat]+=m.importe; });
+    Object.entries(gastoCats).forEach(([cat,v])=>{ csv += '"' + def.name + '","Gasto: ' + cat + '",' + v + '\r\n'; });
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`resumen_pisos_${year}.csv`; a.click();
+}
+
+// ── MOV MODAL ──
+let editingMovPiso = null;
+let editingMovPisoIdx = null;
+
+function setMovTipo(tipo, el) {
+  document.querySelectorAll('#movPisoModalOverlay .tt-btn').forEach(b=>{
+    b.classList.remove('active');
+    b.style.background=''; b.style.borderColor=''; b.style.color='';
+  });
+  el.classList.add('active');
+  if(tipo==='ingreso') { el.style.background='rgba(76,175,125,0.1)'; el.style.borderColor='var(--green)'; el.style.color='var(--green)'; }
+  else { el.style.background='rgba(224,92,92,0.1)'; el.style.borderColor='var(--red)'; el.style.color='var(--red)'; }
+}
+
+function openMovPisoModal(pisoId, idx) {
+  editingMovPiso = pisoId;
+  editingMovPisoIdx = idx;
+  document.getElementById('movPisoTitle').textContent = idx===null ? 'Añadir movimiento' : 'Editar movimiento';
+  document.getElementById('movPisoDeleteBtn').style.display = idx!==null ? 'block' : 'none';
+  document.getElementById('movPisoModalOverlay').classList.add('open');
+  if (idx !== null) {
+    const m = (pisosData[pisoId]||[])[idx];
+    if(!m) return;
+    document.querySelector(`[data-tipo="${m.tipo}"]`)?.click();
+    document.getElementById('movPisoConcepto').value = m.concepto;
+    document.getElementById('movPisoCat').value = m.cat;
+    document.getElementById('movPisoImporte').value = String(m.importe).replace('.',',');
+    document.getElementById('movPisoFecha').value = m.fecha;
+    document.getElementById('movPisoNota').value = m.nota||'';
+  } else {
+    document.querySelector('[data-tipo="ingreso"]')?.click();
+    document.getElementById('movPisoConcepto').value = '';
+    document.getElementById('movPisoCat').value = 'alquiler';
+    document.getElementById('movPisoImporte').value = '';
+    document.getElementById('movPisoFecha').value = new Date().toISOString().split('T')[0];
+    document.getElementById('movPisoNota').value = '';
+  }
+}
+function openEditMovPiso(pisoId, idx) { openMovPisoModal(pisoId, idx); }
+function closeMovPisoModal() {
+  document.getElementById('movPisoModalOverlay').classList.remove('open');
+  editingMovPiso = null; editingMovPisoIdx = null;
+}
+function saveMovPiso() {
+  if(!editingMovPiso) return;
+  const tipo     = document.querySelector('#movPisoModalOverlay .tt-btn.active')?.dataset.tipo || 'gasto';
+  const concepto = document.getElementById('movPisoConcepto').value.trim() || 'Sin concepto';
+  const cat      = document.getElementById('movPisoCat').value;
+  // Accept both comma and dot as decimal separator
+  const importeRaw = document.getElementById('movPisoImporte').value.replace(',','.');
+  const importe  = parseFloat(importeRaw)||0;
+  const fecha    = document.getElementById('movPisoFecha').value;
+  const nota     = document.getElementById('movPisoNota').value.trim();
+  if(!importe||!fecha) { alert('Introduce importe y fecha'); return; }
+  loadPisos();
+  if(!pisosData[editingMovPiso]) pisosData[editingMovPiso]=[];
+  const mov = { tipo, concepto, cat, importe, fecha, nota };
+  if(editingMovPisoIdx!==null) pisosData[editingMovPiso][editingMovPisoIdx]=mov;
+  else pisosData[editingMovPiso].push(mov);
+  savePisos();
+  const pisoToRender = editingMovPiso;
+  closeMovPisoModal();
+  // Guard: only render if pisoId exists in PISOS_DEF
+  if(PISOS_DEF[pisoToRender]) {
+    renderPisoPanel(pisoToRender);
+    renderPisosResumen();
+  }
+}
+function deleteMovPiso() {
+  if(!editingMovPiso||editingMovPisoIdx===null) return;
+  loadPisos();
+  pisosData[editingMovPiso].splice(editingMovPisoIdx,1);
+  savePisos();
+  const pisoD = editingMovPiso;
+  closeMovPisoModal();
+  if(PISOS_DEF[pisoD]) { renderPisoPanel(pisoD); renderPisosResumen(); }
+}
+document.getElementById('movPisoModalOverlay').addEventListener('click',e=>{ if(e.target===document.getElementById('movPisoModalOverlay')) closeMovPisoModal(); });
+
+function setPisoDrive(pisoId) {
+  const url = prompt('Pega el enlace de la carpeta de Google Drive para este piso:');
+  if(url) { PISOS_DEF[pisoId].driveUrl=url; renderPisoPanel(pisoId); }
+}
+
+// pisos keys now included in main getAllData
+
+// ── HOME SCREEN CARD ──
+function showPisosFromHome() {
+  hideHome();
+  showPisos();
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const pisosCard = document.querySelector('.mod-card.c-inmuebles');
+  if(pisosCard) {
+    pisosCard.removeAttribute('href');
+    pisosCard.style.cursor='pointer';
+    pisosCard.onclick = showPisosFromHome;
+    // Remove "En construcción" badge
+    const badge = pisosCard.querySelector('.mod-soon');
+    if(badge) badge.remove();
+  }
+  // Add ← Inicio to pisos header
+  const pisosHeader = document.querySelector('#pisosSection .main-content > div:first-child');
+  if(pisosHeader) {
+    const backBtn = document.createElement('button');
+    backBtn.className='btn-sm'; backBtn.textContent='← Inicio';
+    backBtn.style.marginRight='8px';
+    backBtn.onclick=()=>{ hidePisos(); showHome(); };
+    pisosHeader.querySelector('div:last-child').prepend(backBtn);
+  }
+  // Add pisos to sync
+  const LS_PISOS_KEY = 'finanzas_pisos_jose';
+});
+// ── PISOS EXTRACTO & ASIGNAR ─────────────────────────────────────────────────
+const LS_PISOS_MESES    = 'finanzas_pisos_meses';
+const LS_PISOS_ASIGNAR  = 'finanzas_pisos_asignar';
+
+const PISOS_AUTO_RULES = [
+  { kw:'DA SILVA CORREIA',       pisoId:'noticiero', cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler El Noticiero' },
+  { kw:'QUINTINO',               pisoId:'noticiero', cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler El Noticiero' },
+  { kw:'LETICIA DE LA CARIDAD',  pisoId:'ayuso',     cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler Avd. Ayuso' },
+  { kw:'LETICIA',                pisoId:'ayuso',     cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler Avd. Ayuso' },
+  { kw:'CHARLOTTE YAO',          pisoId:'navarra',   cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler H4 Charlote' },
+  { kw:'LAMAH ROGER',            pisoId:'navarra',   cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler H3 Roger' },
+  { kw:'HASSAN ADBIRIZAK',       pisoId:'navarra',   cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler H2 (habitacion)' },
+  { kw:'SARR KHADIM',            pisoId:'navarra',   cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler H1 (habitacion)' },
+  { kw:'AIMANE',                 pisoId:'navarra',   cat:'alquiler',  tipo:'ingreso', nombre:'Alquiler H2 Aimane' },
+  { kw:'C P NOTICIERO',          pisoId:'noticiero', cat:'comunidad', tipo:'gasto',   nombre:'Comunidad El Noticiero' },
+  { kw:'NOTICIERO 2',            pisoId:'noticiero', cat:'comunidad', tipo:'gasto',   nombre:'Comunidad El Noticiero' },
+  { kw:'AVDA MANUEL RODRIGUEZ',  pisoId:'ayuso',     cat:'comunidad', tipo:'gasto',   nombre:'Comunidad Avd. Ayuso' },
+  { kw:'COM PROP AVENIDA NAVARRA',pisoId:'navarra',  cat:'comunidad', tipo:'gasto',   nombre:'Comunidad Avd. Navarra' },
+  { kw:'PATRIMONIO INMOBILIARIO', pisoId:'navarra',  cat:'gestion',   tipo:'gasto',   nombre:'Gestion Grupo Naera' },
+  { kw:'PRESTAMOS ADEUDO CUOTA N.8077', pisoId:'noticiero', cat:'hipoteca', tipo:'gasto', nombre:'Hipoteca El Noticiero' },
+  { kw:'MASMOVIL',               pisoId:'navarra',   cat:'telefono',  tipo:'gasto',   nombre:'Telefono Avd. Navarra' },
+  { kw:'XFERA',                  pisoId:'navarra',   cat:'telefono',  tipo:'gasto',   nombre:'Telefono Avd. Navarra' },
+  { kw:'GAS NATURGY',            pisoId:'navarra',   cat:'luz',       tipo:'gasto',   nombre:'Gas Avd. Navarra' },
+  { kw:'NATURGY',                pisoId:'navarra',   cat:'luz',       tipo:'gasto',   nombre:'Gas Avd. Navarra' },
+  { kw:'IBERDROLA',              pisoId:'balada',    cat:'luz',       tipo:'gasto',   nombre:'Luz Apartamento Balada' },
+  { kw:'ADEUDO RECIBO MAPFRE',   pisoId:'lagos',     cat:'seguro',    tipo:'gasto',   nombre:'Mapfre: seguros vida+hogar (revisar)' },
+  { kw:'MAPFRE',                 pisoId:'lagos',     cat:'seguro',    tipo:'gasto',   nombre:'Mapfre: seguros (revisar piso)' },
+  { kw:'EUROCAJARURAL',          pisoId:'balada',    cat:'transferencia', tipo:'gasto', nombre:'Transferencia hipoteca Balada (auto-desglose)', eurocaja:true },
+  { kw:'EUROCAJA RURAL',         pisoId:'balada',    cat:'transferencia', tipo:'gasto', nombre:'Transferencia hipoteca Balada (auto-desglose)', eurocaja:true },
+  { kw:'SANTALUCIA',             pisoId:'navarra',   cat:'seguro',    tipo:'gasto',   nombre:'Seguro hogar Santalucia Avd. Navarra' },
+  { kw:'SANTA LUCIA',            pisoId:'navarra',   cat:'seguro',    tipo:'gasto',   nombre:'Seguro hogar Santalucia Avd. Navarra' },
+];
+
+let pisosAsignarState = {};
+let pisosExtractoMeses = {};
+let asignarCurrentMes = '';
+let asignarFilter = 'all';
+
+function loadPisosAsignar() {
+  try { pisosAsignarState = JSON.parse(localStorage.getItem(LS_PISOS_ASIGNAR)||'{}'); } catch { pisosAsignarState={}; }
+  try { pisosExtractoMeses = JSON.parse(localStorage.getItem(LS_PISOS_MESES)||'{}'); } catch { pisosExtractoMeses={}; }
+}
+function savePisosAsignar() {
+  try { localStorage.setItem(LS_PISOS_ASIGNAR, JSON.stringify(pisosAsignarState)); } catch(e){} }
+
+function autoMatchTxn(concepto, importe) {
+  const u = concepto.toUpperCase();
+  // Special rule: transfer of exactly -400 to Jose Antonio = Eurocajarural hipoteca Balada
+  if(importe && Math.abs(importe) === 400 && u.includes('TRANSFERENCIA A JOSE ANTONIO')) {
+    return { kw:'400_BALADA', pisoId:'balada', cat:'transferencia', tipo:'gasto', nombre:'Transferencia hipoteca Balada (auto-desglose)', eurocaja:true };
+  }
+  return PISOS_AUTO_RULES.find(r => u.includes(r.kw.toUpperCase())) || null;
+}
+function getPisoLabel(pisoId) {
+  const labels = { noticiero:'El Noticiero', ayuso:'Avd. Ayuso', navarra:'Avd. Navarra', balada:'Apto. Balada' };
+  return labels[pisoId] || pisoId;
+}
+function updateAsignarBadge() {
+  loadPisosAsignar();
+  let pending = 0;
+  Object.entries(pisosExtractoMeses).forEach(([mes, data])=>{
+    (data.txns||[]).forEach((t,i)=>{ const s=pisosAsignarState[mes+'::'+i]; if(!s||(!s.pisoId&&!s.skip)) pending++; });
+  });
+  const badge = document.getElementById('asignarBadge');
+  if(badge) { badge.textContent=pending; badge.style.display=pending>0?'inline':'none'; }
+}
+
+function renderAsignarPanel() {
+  loadPisosAsignar();
+  const MO = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const meses = Object.keys(pisosExtractoMeses).sort((a,b)=>{
+    const [ma,ya]=a.split(' ');const [mb,yb]=b.split(' ');
+    if(ya!==yb) return (+yb)-(+ya);
+    return MO.indexOf(mb)-MO.indexOf(ma);
+  });
+  if(!meses.length) {
+    document.getElementById('pisoPanels').innerHTML = '<div class="piso-card"><div class="asignar-empty">No has cargado ningun extracto todavia. Pulsa "+ Extracto cuenta pisos" arriba.</div></div>';
+    return;
+  }
+  if(!asignarCurrentMes || !pisosExtractoMeses[asignarCurrentMes]) asignarCurrentMes = meses[0];
+  const txns = pisosExtractoMeses[asignarCurrentMes]?.txns || [];
+  let pending=0,assigned=0,skipped=0;
+  txns.forEach((t,i)=>{ const s=pisosAsignarState[asignarCurrentMes+'::'+i]; if(!s||(!s.pisoId&&!s.skip)) pending++; else if(s.skip) skipped++; else assigned++; });
+
+  let html = '<div class="piso-card">';
+  html += '<div class="asignar-header"><div><div style="font-size:15px;font-weight:500">Asignar movimientos al piso correspondiente</div>';
+  html += '<div style="font-size:12px;color:var(--text2);margin-top:3px"><span style="color:var(--gold)">'+pending+' pendientes</span> · <span style="color:var(--green)">'+assigned+' asignados</span> · <span style="color:var(--text3)">'+skipped+' ignorados</span></div></div>';
+  html += '<button class="btn-sm" onclick="autoAssignAll()">Auto-asignar conocidos</button></div>';
+  html += '<div class="month-nav" style="margin-bottom:1rem">';
+  meses.forEach(m=>{ html += '<button class="month-nav-btn'+(m===asignarCurrentMes?' active':'')+'" onclick="switchAsignarMes(this.dataset.mes)" data-mes="'+m+'">'+m+'</button>'; });
+  html += '</div>';
+  html += '<div class="asignar-filters">';
+  html += '<button class="asignar-filter-btn'+(asignarFilter==="all"?" active":"")+'" onclick="filterAsignarBtn(this)" data-filter="all">Todos ('+txns.length+')</button>';
+  html += '<button class="asignar-filter-btn'+(asignarFilter==="pending"?" active":"")+'" onclick="filterAsignarBtn(this)" data-filter="pending">⏳ Pendientes ('+pending+')</button>';
+  html += '<button class="asignar-filter-btn'+(asignarFilter==="assigned"?" active":"")+'" onclick="filterAsignarBtn(this)" data-filter="assigned">✓ Asignados ('+assigned+')</button>';
+  html += '<button class="asignar-filter-btn'+(asignarFilter==="ignored"?" active":"")+'" onclick="filterAsignarBtn(this)" data-filter="ignored">— Ignorados ('+skipped+')</button>';
+  html += '</div>';
+  html += '<div id="asignarList">'+buildAsignarList(txns, asignarFilter)+'</div>';
+  html += '</div>';
+  document.getElementById('pisoPanels').innerHTML = html;
+  updateAsignarBadge();
+}
+
+function buildAsignarList(txns, filter) {
+  let html = '';
+  txns.forEach((t,i)=>{
+    const key = asignarCurrentMes+'::'+i;
+    const state = pisosAsignarState[key] || {};
+    const isAssigned = !!state.pisoId;
+    const isSkipped  = !!state.skip;
+    const isPending  = !isAssigned && !isSkipped;
+    if(filter==='pending' && !isPending) return;
+    if(filter==='assigned' && !isAssigned) return;
+    if(filter==='ignored' && !isSkipped) return;
+    const autoMatch = autoMatchTxn(t.concepto, t.importe);
+    const amountCls = t.importe > 0 ? 'pos' : 'neg';
+    html += '<div class="asignar-item'+(isAssigned?' assigned':'')+'">';
+    html += '<div class="asignar-item-left"><div class="asignar-item-concepto">'+t.concepto.substring(0,65)+'</div>';
+    html += '<div class="asignar-item-meta"><span>'+t.fecha+'</span>';
+    if(isAssigned) { const mcLabel = state.mesContable ? ' · 📅 '+state.mesContable+'/'+(state.anioContable||'') : ''; html += '<span style="color:var(--green)">'+(state.split ? '⚡ Desglosado en múltiples pisos' : 'Asignado: '+getPisoLabel(state.pisoId)+' · '+state.cat+mcLabel)+'</span>'; }
+    else if(isSkipped) html += '<span style="color:var(--text3)">Ignorado</span>';
+    else if(autoMatch) html += '<span style="color:var(--teal)">Sugerido: '+getPisoLabel(autoMatch.pisoId)+'</span>';
+    html += '</div></div>';
+    html += '<div style="display:flex;align-items:center;gap:8px"><span class="asignar-item-amount '+amountCls+'">'+(t.importe>0?'+':'')+fmt(t.importe)+'</span>';
+    if(isAssigned) {
+      html += '<span style="font-size:11px;color:var(--green)">Asignado</span>';
+      html += '<button class="asignar-skip-btn" onclick="unassignTxnFromKey(this)" data-key="'+key+'">Deshacer</button>';
+    } else {
+      html += '<div class="asignar-actions">';
+      const isMapfre = t.concepto.toUpperCase().includes('MAPFRE') && t.importe < 0;
+      if(isMapfre) {
+        html += '<button class="asignar-piso-btn" style="border-color:rgba(201,168,76,0.5);color:var(--gold)" onclick="desglosarMapfre(this)" data-key="'+key+'">⚡ Desglosar Mapfre</button>';
+      } else if(autoMatch) {
+        // Auto-assign directly — no need to confirm, rules are known
+        if(autoMatch.eurocaja) autoDesgloseEurocaja(key);
+        else assignTxn(key, autoMatch.pisoId, autoMatch.cat, autoMatch.tipo, autoMatch.nombre);
+        return; // skip rendering this item, it's now assigned
+      }
+      html += '<button class="asignar-piso-btn" onclick="openAssignModalFromBtn(this)" data-key="'+key+'" data-idx="'+i+'">Elegir piso</button>';
+      if(!isSkipped) html += '<button class="asignar-skip-btn" onclick="skipTxnFromKey(this)" data-key="'+key+'">Ignorar</button>';
+      html += '</div>';
+    }
+    html += '</div></div>';
+  });
+  return html || '<div class="asignar-empty">No hay movimientos en esta categoria.</div>';
+}
+
+function switchAsignarMes(mes) { asignarCurrentMes=mes; renderAsignarPanel(); }
+function filterAsignarBtn(el) { filterAsignar(el.dataset.filter, el); }
+function filterAsignar(filter, el) {
+  asignarFilter=filter;
+  document.querySelectorAll('.asignar-filter-btn').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  const txns = pisosExtractoMeses[asignarCurrentMes]?.txns || [];
+  document.getElementById('asignarList').innerHTML = buildAsignarList(txns, filter);
+}
+
+function assignTxn(key, pisoId, cat, tipo, nombre, mesContable, anioContable) {
+  const parts=key.split('::'); const mes=parts[0]; const idx=parseInt(parts[1]);
+  const t=pisosExtractoMeses[mes]?.txns[idx]; if(!t) return;
+  pisosAsignarState[key]={pisoId,cat,tipo,nombre,mesContable:mesContable||'',anioContable:anioContable||''};
+  savePisosAsignar();
+  loadPisos();
+  if(!pisosData[pisoId]) pisosData[pisoId]=[];
+  if(!pisosData[pisoId].some(m=>m._key===key)) {
+    const fechaParts = t.fecha.substring(0,10).split('/');
+    let fechaISO = fechaParts.length===3 ? fechaParts[2]+'-'+fechaParts[1]+'-'+fechaParts[0] : t.fecha.substring(0,10);
+    if(mesContable) {
+      const anio = anioContable || fechaISO.substring(0,4);
+      fechaISO = anio+'-'+mesContable+'-01';
+    }
+    const nota = mesContable ? '[Mes contable: '+mesContable+'/'+(anioContable||fechaISO.substring(0,4))+']' : '';
+    pisosData[pisoId].push({tipo,concepto:nombre||t.concepto.substring(0,50),cat,importe:Math.abs(t.importe),fecha:fechaISO,nota,_key:key});
+    savePisos();
+  }
+  const txns=pisosExtractoMeses[asignarCurrentMes]?.txns||[];
+  document.getElementById('asignarList').innerHTML=buildAsignarList(txns,asignarFilter);
+  updateAsignarBadge();
+}
+function skipTxn(key) {
+  pisosAsignarState[key]={skip:true}; savePisosAsignar();
+  const txns=pisosExtractoMeses[asignarCurrentMes]?.txns||[];
+  document.getElementById('asignarList').innerHTML=buildAsignarList(txns,asignarFilter);
+  updateAsignarBadge();
+}
+function unassignTxn(key) {
+  const state=pisosAsignarState[key];
+  if(state&&state.pisoId) { loadPisos(); if(pisosData[state.pisoId]) { pisosData[state.pisoId]=pisosData[state.pisoId].filter(m=>m._key!==key); savePisos(); } }
+  delete pisosAsignarState[key]; savePisosAsignar();
+  const txns=pisosExtractoMeses[asignarCurrentMes]?.txns||[];
+  document.getElementById('asignarList').innerHTML=buildAsignarList(txns,asignarFilter);
+  updateAsignarBadge();
+}
+function autoAssignAll() {
+  loadPisosAsignar();
+  const txns=pisosExtractoMeses[asignarCurrentMes]?.txns||[]; let count=0;
+  txns.forEach((t,i)=>{ const key=asignarCurrentMes+'::'+i; if(pisosAsignarState[key]) return; const m=autoMatchTxn(t.concepto, t.importe); if(m){ if(m.eurocaja){ autoDesgloseEurocaja(key); } else { assignTxn(key,m.pisoId,m.cat,m.tipo,m.nombre); } count++;} });
+  alert(count ? count+' movimientos asignados.' : 'No hay movimientos nuevos que reconocer.');
+  renderAsignarPanel();
+}
+
+let assignModalKey=null, assignModalIdx=null;
+function openAssignModal(key,idx) {
+  assignModalKey=key; assignModalIdx=idx;
+  const mes=key.split('::')[0]; const t=pisosExtractoMeses[mes]?.txns[idx]; if(!t) return;
+  const existing=document.getElementById('assignQuickModal'); if(existing) existing.remove();
+  const m=document.createElement('div'); m.id='assignQuickModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:400;display:flex;align-items:center;justify-content:center;';
+  m.innerHTML='<div style="background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2rem;width:100%;max-width:440px">'
+    +'<div style="font-family:Playfair Display,serif;font-size:18px;font-weight:700;margin-bottom:.5rem">Asignar movimiento</div>'
+    +'<div style="font-size:12px;color:var(--text2);margin-bottom:1.25rem">'+t.concepto.substring(0,60)+'<br><strong style="color:'+(t.importe>0?'var(--green)':'var(--red)')+'">'+fmt(t.importe)+'</strong></div>'
+    +'<div class="modal-sec"><div class="modal-lbl">Piso</div><select class="modal-select" id="aqPiso"><option value="lagos">Lagos de Millares</option><option value="noticiero">El Noticiero</option><option value="ayuso">Avd. Ayuso</option><option value="navarra">Avd. Navarra</option><option value="balada">Apto. Balada</option></select></div>'
+    +'<div class="modal-sec"><div class="modal-lbl">Categoria</div><select class="modal-select" id="aqCat"><option value="alquiler">Alquiler</option><option value="comunidad">Comunidad</option><option value="ibi">IBI</option><option value="hipoteca">Hipoteca</option><option value="seguro">Seguro</option><option value="luz">Luz/Gas</option><option value="agua">Agua</option><option value="telefono">Telefono</option><option value="gestion">Gestion</option><option value="reparacion">Reparacion</option><option value="otros">Otros</option><option value="transferencia">↔ Transferencia entre cuentas (ignorar)</option></select></div>'
+    +'<div class="modal-sec"><div class="modal-lbl">Nombre</div><input class="modal-input" id="aqNombre" type="text" placeholder="'+t.concepto.substring(0,40)+'"></div>'
+    +'<div class="modal-sec"><div class="modal-lbl" style="color:var(--teal)">📅 Mes contable (si el pago es de otro mes)</div><div style="display:flex;gap:8px"><select class="modal-select" id="aqMesC" style="flex:1"><option value="">— Usar mes del extracto</option><option value="01">Enero</option><option value="02">Febrero</option><option value="03">Marzo</option><option value="04">Abril</option><option value="05">Mayo</option><option value="06">Junio</option><option value="07">Julio</option><option value="08">Agosto</option><option value="09">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select><select class="modal-select" id="aqAnioC"><option value="2025">2025</option><option value="2026">2026</option><option value="2024">2024</option></select></div></div>'
+    +'<div class="modal-footer"><button class="btn-cancel" onclick="closeAssignQuickModal()">Cancelar</button><button class="btn-save" onclick="confirmAssignModal()">Asignar</button></div>'
+    +'</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{ if(e.target===m) m.remove(); });
+}
+function confirmAssignModal() {
+  const pisoId = document.getElementById('aqPiso').value;
+  const cat    = document.getElementById('aqCat').value;
+  const nombre = document.getElementById('aqNombre').value.trim();
+  const mesC   = document.getElementById('aqMesC')?.value || '';
+  const anioC  = document.getElementById('aqAnioC')?.value || '';
+  const mes    = assignModalKey.split('::')[0];
+  const t      = pisosExtractoMeses[mes]?.txns[assignModalIdx];
+  const tipo   = t?.importe > 0 ? 'ingreso' : 'gasto';
+  assignTxn(assignModalKey, pisoId, cat, tipo, nombre||t?.concepto.substring(0,50)||'', mesC, anioC);
+  document.getElementById('assignQuickModal')?.remove();
+}
+
+// File handler
+document.getElementById('pisosFileIn').addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const newMonths=parseSabadell(ev.target.result);
+    if(!Object.keys(newMonths).length){alert('No se encontraron movimientos.');return;}
+    try { let pm=JSON.parse(localStorage.getItem(LS_PISOS_MESES)||'{}'); Object.assign(pm,newMonths); localStorage.setItem(LS_PISOS_MESES,JSON.stringify(pm)); pisosExtractoMeses=pm; } catch(e2){}
+    const total=Object.values(newMonths).reduce((s,m)=>s+(m.txns?.length||0),0);
+    updateAsignarBadge();
+    showPiso('asignar',document.getElementById('tabAsignar'));
+    alert(total+' movimientos cargados. Pulsa "Auto-asignar conocidos" para empezar.');
+  };
+  reader.readAsBinaryString(f);
+  e.target.value='';
+});
+
+
+function desglosarMapfre(el) {
+  const key = el.dataset.key;
+  const mes = key.split('::')[0];
+  const idx = parseInt(key.split('::')[1]);
+  const t = pisosExtractoMeses[mes]?.txns[idx];
+  if(!t) return;
+  const total = Math.abs(t.importe);
+
+  // Build split modal
+  const existing = document.getElementById('mapfreModal'); if(existing) existing.remove();
+  const m = document.createElement('div'); m.id='mapfreModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:400;display:flex;align-items:center;justify-content:center;';
+  m.innerHTML = '<div style="background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto">'
+    +'<div style="font-family:Playfair Display,serif;font-size:18px;font-weight:700;margin-bottom:.5rem">Desglosar recibo Mapfre</div>'
+    +'<div style="font-size:12px;color:var(--text2);margin-bottom:1.25rem">Total: <strong style="color:var(--red)">'+fmt(total)+'</strong> — Introduce los importes exactos de tu justificante mensual</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">'
+    +'<div><div style="font-size:11px;color:var(--text2);margin-bottom:4px">Vida José</div><input class="modal-input" id="mf_jose" type="number" step="0.01" value="20.53"></div>'
+    +'<div><div style="font-size:11px;color:var(--text2);margin-bottom:4px">Vida Noelia</div><input class="modal-input" id="mf_noelia" type="number" step="0.01" value="16.56"></div>'
+    +'<div><div style="font-size:11px;color:var(--text2);margin-bottom:4px">Hogar El Noticiero</div><input class="modal-input" id="mf_noticiero" type="number" step="0.01" value="17.81"></div>'
+    +'<div><div style="font-size:11px;color:var(--text2);margin-bottom:4px">Hogar Lagos de Millares</div><input class="modal-input" id="mf_lagos" type="number" step="0.01" value="23.52"></div>'
+    +'</div>'
+    +'<div id="mfTotal" style="font-size:12px;color:var(--text2);margin-bottom:1rem;padding:8px;background:var(--bg3);border-radius:8px">Suma: calculando...</div>'
+    +"<div class=\"modal-footer\"><button class=\"btn-cancel\" onclick=\"document.getElementById('mapfreModal').remove()\">Cancelar</button><button class=\"btn-save\" onclick=\"confirmarMapfreSplit('"+key+"')\" >Desglosar y asignar</button></div>"
+    +'</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{ if(e.target===m) m.remove(); });
+  ['mf_jose','mf_noelia','mf_noticiero','mf_lagos'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', ()=>{
+      const sum = ['mf_jose','mf_noelia','mf_noticiero','mf_lagos'].reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
+      const diff = Math.abs(sum - total);
+      const el2 = document.getElementById('mfTotal');
+      el2.textContent = 'Suma: '+fmt(sum)+' / Total recibo: '+fmt(total)+(diff<0.1?' ✓':' ⚠ Diferencia: '+fmt(diff));
+      el2.style.color = diff<0.1 ? 'var(--green)' : 'var(--gold)';
+    });
+  });
+  // Trigger initial calc
+  document.getElementById('mf_jose').dispatchEvent(new Event('input'));
+}
+
+function confirmarMapfreSplit(key) {
+  const jose     = parseFloat(document.getElementById('mf_jose').value)||0;
+  const noelia   = parseFloat(document.getElementById('mf_noelia').value)||0;
+  const noticiero= parseFloat(document.getElementById('mf_noticiero').value)||0;
+  const lagos    = parseFloat(document.getElementById('mf_lagos').value)||0;
+  const mes = key.split('::')[0];
+  const t = pisosExtractoMeses[mes]?.txns[parseInt(key.split('::')[1])];
+  if(!t) return;
+  const fecha = t.fecha.substring(0,10).split('/').reverse().join('-');
+  loadPisos();
+  const addMov = (pisoId, concepto, importe) => {
+    if(!pisosData[pisoId]) pisosData[pisoId]=[];
+    if(!pisosData[pisoId].some(m=>m._key===key+'_'+pisoId))
+      pisosData[pisoId].push({tipo:'gasto',concepto,cat:'seguro',importe,fecha,nota:'Desglose Mapfre',_key:key+'_'+pisoId});
+  };
+  if(jose>0)      addMov('lagos',    'Seguro vida José (Mapfre)', jose);
+  if(noelia>0)    addMov('lagos',    'Seguro vida Noelia (Mapfre)', noelia);
+  if(noticiero>0) addMov('noticiero','Seguro hogar Noticiero (Mapfre)', noticiero);
+  if(lagos>0)     addMov('lagos',    'Seguro hogar Lagos de Millares (Mapfre)', lagos);
+  savePisos();
+  pisosAsignarState[key] = { pisoId:'lagos', cat:'seguro', tipo:'gasto', nombre:'Desglose Mapfre (4 seguros)', split:true };
+  savePisosAsignar();
+  document.getElementById('mapfreModal')?.remove();
+  filterAsignar(asignarFilter, null);
+  updateAsignarBadge();
+  alert('✓ Mapfre desglosado en 4 movimientos y asignado correctamente.');
+}
+
+function closeAssignQuickModal(){document.getElementById("assignQuickModal")?.remove();}
+function unassignTxnFromKey(el) { unassignTxn(el.dataset.key); }
+function skipTxnFromKey(el) { skipTxn(el.dataset.key); }
+
+function autoAssignFromBtn(el) {
+  // Check if this is Eurocajarural - needs special split
+  const concepto = el.dataset.nombre || '';
+  if(concepto.includes('auto-desglose')) {
+    autoDesgloseEurocaja(el.dataset.key);
+  } else {
+    assignTxn(el.dataset.key, el.dataset.piso, el.dataset.cat, el.dataset.tipo, el.dataset.nombre);
+  }
+}
+
+function autoDesgloseEurocaja(key) {
+  const mes = key.split('::')[0];
+  const idx = parseInt(key.split('::')[1]);
+  const t = pisosExtractoMeses[mes]?.txns[idx];
+  if(!t) return;
+  const fecha = t.fecha.substring(0,10).split('/').reverse().join('-');
+  loadPisos();
+  if(!pisosData['balada']) pisosData['balada']=[];
+  if(!pisosData['balada'].some(m=>m._key===key+'_hip'))
+    pisosData['balada'].push({tipo:'gasto',concepto:'Hipoteca Eurocajarural',cat:'hipoteca',importe:377.74,fecha,nota:'Auto-desglose transferencia 400€',_key:key+'_hip'});
+  if(!pisosData['balada'].some(m=>m._key===key+'_prov'))
+    pisosData['balada'].push({tipo:'gasto',concepto:'Provision hipoteca Balada',cat:'provision',importe:22.26,fecha,nota:'Auto-desglose transferencia 400€',_key:key+'_prov'});
+  savePisos();
+  pisosAsignarState[key]={pisoId:'balada',cat:'transferencia',tipo:'gasto',nombre:'Transferencia Eurocajarural (desglosada)',split:true};
+  savePisosAsignar();
+  const txns=pisosExtractoMeses[asignarCurrentMes]?.txns||[];
+  document.getElementById('asignarList').innerHTML=buildAsignarList(txns,asignarFilter);
+  updateAsignarBadge();
+  // Also handle in autoAssignAll
+}
+function openAssignModalFromBtn(el) { openAssignModal(el.dataset.key, parseInt(el.dataset.idx)); }
+// ══ END INMUEBLES ════════════════════════════════════════════════════════════
+
+
+// ── BLOC DE NOTAS ─────────────────────────────────────────────────────────────
+const LS_BLOC = { personal:'finanzas_bloc_personal', comun:'finanzas_bloc_comun', pisos:'finanzas_bloc_pisos' };
+
+function getBlocData(cuenta) {
+  try { return JSON.parse(localStorage.getItem(LS_BLOC[cuenta])||'[]'); } catch { return []; }
+}
+function saveBlocData(cuenta, data) {
+  try { localStorage.setItem(LS_BLOC[cuenta], JSON.stringify(data)); } catch(e){}
+}
+
+function renderBlocList(items, cuenta) {
+  if(!items.length) return '<div class="bloc-empty">Sin anotaciones este mes</div>';
+  return items.map((it,i)=>{
+    return '<div class="bloc-item">'
+      +'<span class="bloc-fecha">'+it.fecha+'</span>'
+      +'<span class="bloc-desc">'+it.desc+'</span>'
+      +'<div style="display:flex;align-items:center;gap:6px"><span class="bloc-cat">'+it.cat+'</span>'
+      +'<button class="bloc-del" onclick="deleteBlocFromBtn(this)" data-cuenta="'+cuenta+'" data-idx="'+i+'">×</button></div>'
+      +'</div>';
+  }).join('');
+}
+function closeBlocModal(){document.getElementById("blocModal")?.remove();}
+function deleteBlocFromBtn(el) { deleteBlocItem(el.dataset.cuenta, parseInt(el.dataset.idx)); }
+
+function openBlocModal(cuenta) {
+  const existing = document.getElementById('blocModal'); if(existing) existing.remove();
+  const cuentaLabel = cuenta==='personal' ? 'Mis Finanzas' : cuenta==='comun' ? 'Cuenta Común' : 'Cuenta Pisos';
+  const items = getBlocData(cuenta);
+  const m = document.createElement('div'); m.id='blocModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1rem;';
+
+  let listHtml = renderBlocList(items, cuenta);
+
+  m.innerHTML = '<div style="background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2rem;width:100%;max-width:560px;max-height:85vh;overflow-y:auto">'
+    +'<div style="font-family:Playfair Display,serif;font-size:18px;font-weight:700;margin-bottom:.25rem">📝 Bloc de notas</div>'
+    +'<div style="font-size:12px;color:var(--text2);margin-bottom:1.25rem">'+cuentaLabel+' — anota movimientos antes de recibir el extracto</div>'
+    +'<div style="display:grid;grid-template-columns:110px 1fr 130px;gap:8px;margin-bottom:1rem">'
+    +'<input class="modal-input" id="blocFecha" type="date" value="'+new Date().toISOString().slice(0,10)+'">'
+    +'<input class="modal-input" id="blocDesc" type="text" placeholder="Descripción del movimiento...">'
+    +'<input class="modal-input" id="blocCat" type="text" placeholder="Categoría / piso...">'
+    +'</div>'
+    +'<button class="btn-save" style="width:100%;margin-bottom:1.25rem" onclick="addBlocFromBtn(this)" data-cuenta="'+cuenta+'">+ Añadir anotación</button>'
+    +'<div id="blocList">'+listHtml+'</div>'
+    +'<div class="modal-footer" style="margin-top:1rem"><button class="btn-cancel" onclick="closeBlocModal()">Cerrar</button></div>'
+    +'</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click', e=>{ if(e.target===m) m.remove(); });
+  setTimeout(()=>document.getElementById('blocDesc')?.focus(), 100);
+}
+
+function addBlocFromBtn(el) { addBlocItem(el.dataset.cuenta); }
+function addBlocItem(cuenta) {
+  const fecha = document.getElementById('blocFecha').value;
+  const desc  = document.getElementById('blocDesc').value.trim();
+  const cat   = document.getElementById('blocCat').value.trim();
+  if(!fecha || !desc) { alert('Introduce al menos la fecha y la descripción'); return; }
+  const items = getBlocData(cuenta);
+  items.unshift({ fecha, desc, cat: cat||'Sin categoría', ts: Date.now() });
+  saveBlocData(cuenta, items);
+  document.getElementById('blocDesc').value = '';
+  document.getElementById('blocCat').value = '';
+  // Re-render list
+  document.getElementById('blocList').innerHTML = renderBlocList(items, cuenta);
+}
+
+function deleteBlocItem(cuenta, idx) {
+  const items = getBlocData(cuenta);
+  items.splice(idx, 1);
+  saveBlocData(cuenta, items);
+  document.getElementById('blocList').innerHTML = renderBlocList(items, cuenta);
+}
+// ── END BLOC ──────────────────────────────────────────────────────────────────
+
 </script>
 </body>
 </html>

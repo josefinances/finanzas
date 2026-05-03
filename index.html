@@ -1676,6 +1676,15 @@ footer {
         <label class="toggle"><input type="checkbox" id="editExclude"><span class="tog-sl"></span></label>
       </div>
     </div>
+    <div class="modal-sec" id="askNoeliaRow" style="display:none">
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-lbl">❓ Preguntar a Noelia</div>
+          <div class="toggle-sub">Marcar para revisar con Noelia</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="editAskNoelia"><span class="tog-sl"></span></label>
+      </div>
+    </div>
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
       <button class="btn-save" onclick="saveEdit()">Guardar</button>
@@ -1725,47 +1734,31 @@ const CATS = [
   {cat:'Bizum enviado',    icon:'💸',color:'#e05c5c', kw:['PAGO BIZUM']},
   // ── ALIMENTACIÓN ──────────────────────────────────────────────────────────
   {cat:'Comida Noelia (trabajo)', icon:'🥗',color:'#4cc9c0', kw:['DIA MALLEN','DIA MALLON']},
-  // ── 🏠 HOGAR ──────────────────────────────────────────────────────────────────
-  {cat:'Hipoteca / Alquiler',icon:'🏠',color:'#5c9be0',group:'Hogar',kw:['PRESTAMOS ADEUDO','HIPOTECA','ALQUILER']},
-  {cat:'Suministros',       icon:'💡',color:'#e0b45c',group:'Hogar',kw:['NATURGY','IBERDROLA','ENDESA','ORANGE','MASMOVIL','XFERA','AGUA ']},
-  {cat:'Comunidad',         icon:'🏢',color:'#7c5cc4',group:'Hogar',kw:['COMUNIDAD PROP','C.P. PARQUE','COM PROP']},
-  {cat:'Hogar y electrónica',icon:'📺',color:'#5c9be0',group:'Hogar',kw:['MM ZARAGOZA','MEDIAMARKT','DYSON','LEROY','IKEA','BRICOMART']},
-  // ── 🚗 VEHÍCULO ───────────────────────────────────────────────────────────────
-  {cat:'Gasolina',          icon:'⛽',color:'#e0a05c',group:'Vehículo',kw:['VASCO ARAGONESA','ES ALCAMPO LOS ENLACES','GOTTA LOS ENLACES']},
-  {cat:'Seguro vehículo',   icon:'🛡',color:'#9b7dd4',group:'Vehículo',kw:['SEGURO AUTO','SEGURO COCHE','SEGURO BMW','SEGURO MERCEDES','SEGURO TUCSON','DGT']},
-  {cat:'ITV / Taller',      icon:'🔧',color:'#e07c5c',group:'Vehículo',kw:['TALLER','ITV','NEUMATICOS','AUTORECAMBIOS']},
-  {cat:'Parking y autopista',icon:'🅿',color:'#5cb8e0',group:'Vehículo',kw:['PARKING','AUTOPISTA','PEAJE','SABA ','EMASA','INDIGO']},
-  {cat:'Transporte público', icon:'🚌',color:'#5cb8e0',group:'Vehículo',kw:['URBANOS','RENFE','METRO','BUS ','TAXI']},
-  // ── 🛒 ALIMENTACIÓN ───────────────────────────────────────────────────────────
-  {cat:'Supermercado',      icon:'🛒',color:'#7dc96e',group:'Alimentación',kw:['MERCADONA','LOS FRUTALES','CORP ALIM GUISSONA','COOP. SANTO CRISTO','ALCAMPO','SUPERCOR','EROSKI','LIDL','ALDI','CARREFOUR','MARTIN MARTIN','DIA ']},
-  {cat:'Restaurantes',      icon:'🍽',color:'#e07c5c',group:'Alimentación',kw:['TAGLIATELLA','TELEPIZZA','MCDONALDS','JUST EAT','GLOVO','MAS CLARAS','CAFETERIA','RESTAURANTE','BAR ','BURGER','VALOR ZARAGOZA']},
-  {cat:'Panadería',         icon:'🥖',color:'#e0b45c',group:'Alimentación',kw:['PANISHOP','PANADERIA TORRES','EXPLAGOSAL']},
-  {cat:'Desayunos Noelia',  icon:'☕',color:'#c9a84c',group:'Alimentación',kw:['PANISHOP SALVADOR ALLENDE']},
-  // ── 💊 SALUD ──────────────────────────────────────────────────────────────────
-  {cat:'Farmacia',          icon:'💊',color:'#e05c8a',group:'Salud',kw:['FARMACIA']},
-  {cat:'Médico / Clínica',  icon:'🏥',color:'#e05c5c',group:'Salud',kw:['CLINICA','MÉDICO','HOSPITAL','SANITAS','ADESLAS']},
-  {cat:'Gimnasio',          icon:'🏋',color:'#4caf7d',group:'Salud',kw:['FORUS','DREAMFIT','GIMNASIO']},
-  // ── 👨‍👩‍👦 FAMILIA ────────────────────────────────────────────────────────────────
-  {cat:'Juegos Iker',       icon:'🎮',color:'#9b7dd4',group:'Familia',kw:['NINTENDO','PLAYSTATION','STEAM','XBOX','GAME ']},
-  {cat:'Colegio / Educación',icon:'📚',color:'#5c9be0',group:'Familia',kw:['COLEGIO','ESCUELA','ACADEMIA','HOTMART','SEQURA']},
-  {cat:'Regalos',           icon:'🎁',color:'#e07c5c',group:'Familia',kw:['PANDORA','FNAC']},
-  // ── 👗 COMPRAS ────────────────────────────────────────────────────────────────
-  {cat:'Ropa y moda',       icon:'👗',color:'#9b7dd4',group:'Compras',kw:['PRIMOR','DRUNI','ARENAL','ZARA','PULL','MANGO','NUOVA ISRAEL','EL CORTE INGLES','CLAREL','GILCA']},
-  {cat:'Peluquería',        icon:'💇',color:'#e05c8a',group:'Compras',kw:['PELUQUER','BARBERIA','SALON DE BELLEZA']},
-  // ── 🔁 SUSCRIPCIONES Y OCIO ──────────────────────────────────────────────────
-  {cat:'Suscripciones',     icon:'🔁',color:'#c9a84c',group:'Ocio',kw:['APPLE.COM','OPENAI','CHATGPT','LEGALITAS','YOUTUBE','REAL MADRID']},
-  {cat:'Ocio y entretenimiento',icon:'🎬',color:'#7c5cc4',group:'Ocio',kw:['CINE','TEATRO','CONCIERTO','SPOTIFY','NETFLIX','PRIME VIDEO']},
-  {cat:'Viajes',            icon:'✈️',color:'#4caf7d',group:'Ocio',kw:['VUELING','IBERIA','RENFE AVE','HOTEL','AIRBNB','BOOKING']},
-  // ── 💰 FINANZAS ───────────────────────────────────────────────────────────────
-  {cat:'Seguros',           icon:'🛡',color:'#7c5cc4',group:'Finanzas',kw:['MAPFRE','SANTALUCIA','AXA','ALLIANZ']},
-  {cat:'Inversión',         icon:'📈',color:'#4caf7d',group:'Finanzas',kw:['TRADE REPUBLIC','INDEXA','URBANITAE','BIT2ME','REVOLUT']},
-  {cat:'Donaciones',        icon:'❤', color:'#e05c5c',group:'Finanzas',kw:['ONG','ALDEAS','UNICEF','CRUZ ROJA']},
-  {cat:'Formación',         icon:'📖',color:'#9b7dd4',group:'Finanzas',kw:['TRADEANDO','OCEANO ATLANTICO']},
-  // ── 📦 OTROS ─────────────────────────────────────────────────────────────────
-  {cat:'Efectivo',          icon:'💵',color:'#c9a84c',group:'Otros',kw:['REINTEGRO','CAJERO']},
-  {cat:'Comisiones',        icon:'⚙', color:'#666',   group:'Otros',kw:['COMISION','COMISIÓN']},
-  {cat:'Otros',             icon:'📦',color:'#666',   group:'Otros',kw:[]},
-];
+  {cat:'Desayunos Noelia', icon:'☕',color:'#c9a84c', kw:['PANISHOP SALVADOR ALLENDE']},
+  {cat:'Panadería',        icon:'🥖',color:'#e0b45c', kw:['PANISHOP','PANADERIA TORRES','EXPLAGOSAL']},
+  {cat:'Supermercado',     icon:'🛒',color:'#7dc96e', kw:['MERCADONA','LOS FRUTALES','CORP ALIM GUISSONA','COOP. SANTO CRISTO','ALCAMPO','SUPERCOR','CHARCUTERIA','EROSKI','LIDL','ALDI','CARREFOUR','MARTIN MARTIN','DIA ']},
+  {cat:'Restaurantes y delivery',icon:'🍽',color:'#e07c5c',kw:['TAGLIATELLA','TELEPIZZA','MCDONALDS','JUST EAT','GLOVO','MAS CLARAS','CAFETERIA','RESTAURANTE','BAR ','BURGER','VALOR ZARAGOZA']},
+  // ── COMPRAS ───────────────────────────────────────────────────────────────
+  {cat:'Moda y compras',   icon:'👗',color:'#9b7dd4', kw:['PRIMOR','DRUNI','ARENAL','PANDORA','ZARA','PULL','MANGO','NUOVA ISRAEL','EL CORTE INGLES','INDIGO SALAMERO','CLAREL','GILCA']},
+  {cat:'Hogar y electrónica',icon:'📺',color:'#5c9be0',kw:['MM ZARAGOZA','MEDIAMARKT','DYSON','LEROY','IKEA','BRICOMART']},
+  // ── TRANSPORTE ────────────────────────────────────────────────────────────
+  {cat:'Gasolina',         icon:'⛽',color:'#e0a05c', kw:['VASCO ARAGONESA','ES ALCAMPO LOS ENLACES','GOTTA LOS ENLACES']},
+  {cat:'Transporte',       icon:'🚌',color:'#5cb8e0', kw:['URBANOS','RENFE','METRO','BUS ','TAXI','INDIGO']},
+  {cat:'Parking y autopista',icon:'🅿',color:'#5cb8e0', kw:['PARKING','AUTOPISTA','PEAJE','SABA ','EMASA','INDIGO SALAMERO']},
+  {cat:'Peluquería',        icon:'💇',color:'#e05c8a', kw:['PELUQUER','BARBERIA','SALON DE BELLEZA','HAIRCUT']},
+  {cat:'Regalos',           icon:'🎁',color:'#e07c5c', kw:['PANDORA','FNAC','EL CORTE INGLES REGALO']},
+  // ── SALUD ─────────────────────────────────────────────────────────────────
+  {cat:'Salud y farmacia', icon:'💊',color:'#e05c8a', kw:['FARMACIA','CLINICA','MÉDICO','HOSPITAL']},
+  // ── FAMILIA ───────────────────────────────────────────────────────────────
+  {cat:'Juegos Iker',      icon:'🎮',color:'#9b7dd4', kw:['NINTENDO','PLAYSTATION','STEAM','XBOX','GAME ']},
+  // ── OTROS ─────────────────────────────────────────────────────────────────
+  {cat:'Formación',        icon:'📚',color:'#9b7dd4', kw:['HOTMART','SEQURA','OCEANO ATLANTICO','TRADEANDO']},
+  {cat:'Suscripciones',    icon:'🔁',color:'#c9a84c', kw:['APPLE.COM','OPENAI','CHATGPT','LEGALITAS','YOUTUBE','REAL MADRID']},
+  {cat:'Donaciones',       icon:'❤', color:'#e05c5c', kw:['ONG','ALDEAS','UNICEF','CRUZ ROJA']},
+  {cat:'Efectivo',         icon:'💵',color:'#c9a84c', kw:['REINTEGRO','CAJERO']},
+  {cat:'Comisiones',       icon:'⚙', color:'#666',   kw:['COMISION','COMISIÓN']},
+  {cat:'Otros',            icon:'📦',color:'#666',   kw:[]},
+]
 function categorize(concepto) {
   const u = (concepto||'').toUpperCase();
   for (const r of CATS) { if (r.kw.some(k=>u.includes(k))) return r; }
@@ -1865,8 +1858,8 @@ function renderMonth(key) {
     const tp=detectTipo(t.concepto,t.importe);
     if (t.exclude) return false;
     if (tp==='income') return true;
-    // Positive transfers not excluded count as income (unless tagged as inv)
-    if (tp==='xfer' && t.importe>0 && t.transferType!=='inv') return true;
+    // Positive transfer manually marked as income
+    if (tp==='xfer' && t.importe>0 && t.transferType==='income-xfer') return true;
     return false;
   });
   const expenses = enriched.filter(t => { const tp=detectTipo(t.concepto,t.importe); return tp==='expense' && !t.exclude; });
